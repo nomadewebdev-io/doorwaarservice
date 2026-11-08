@@ -119,3 +119,4 @@ export function AdminNavBar({ profile }: AdminNavBarProps) {
     </header>
   );
 }
+

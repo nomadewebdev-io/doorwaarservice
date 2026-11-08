@@ -78,3 +78,4 @@ export async function requireStaffApi(
 
   return { ok: true, supabase, profile };
 }
+

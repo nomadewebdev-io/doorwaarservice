@@ -146,7 +146,7 @@ export function CatalogFiltersBar({
               list="catalog-locations-list"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              placeholder="Dakar, Diamniadio, Saly..."
+              placeholder="Kolda, Sikilo, Vélingara..."
               className="h-10 w-full rounded-md border border-border-strong bg-canvas px-2.5 text-sm text-ink placeholder:text-ink-muted focus:border-navy focus:outline-none"
             />
             <datalist id="catalog-locations-list">
@@ -167,7 +167,7 @@ export function CatalogFiltersBar({
               step={50000}
               value={minPrice}
               onChange={(e) => setMinPrice(e.target.value)}
-              placeholder="Ex : 400000"
+              placeholder="Ex : 150000"
               className="h-10 w-full rounded-md border border-border-strong bg-canvas px-2.5 text-sm text-ink tabular-nums placeholder:text-ink-muted focus:border-navy focus:outline-none"
             />
           </div>
@@ -183,7 +183,7 @@ export function CatalogFiltersBar({
               step={50000}
               value={maxPrice}
               onChange={(e) => setMaxPrice(e.target.value)}
-              placeholder="Ex : 30000000"
+              placeholder="Ex : 15000000"
               className="h-10 w-full rounded-md border border-border-strong bg-canvas px-2.5 text-sm text-ink tabular-nums placeholder:text-ink-muted focus:border-navy focus:outline-none"
             />
           </div>
@@ -259,3 +259,4 @@ export function CatalogFiltersBar({
     </div>
   );
 }
+

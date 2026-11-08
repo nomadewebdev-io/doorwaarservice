@@ -26,3 +26,4 @@ export default async function AdminListingsPage() {
 
   return <AgentListingsManager initialListings={listings} />;
 }
+

@@ -23,8 +23,9 @@ export function SiteFooter() {
               </span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-300">
-              {SITE_CONFIG.slogan}. Accompagnement foncier vérifié et gestion d’appartements
-              meublés prêts à vivre à Dakar, Diamniadio, sur la Petite Côte et à Thiès.
+              {SITE_CONFIG.slogan}. Implantée à Kolda, l’agence concentre son activité sur la
+              région de Kolda (Haute-Casamance) : terrains vérifiés et appartements meublés prêts
+              à vivre.
             </p>
             <div className="mt-6">
               <p className="text-xs font-semibold uppercase tracking-wider text-gold-light">
@@ -94,47 +95,47 @@ export function SiteFooter() {
 
           <div className="lg:col-span-3">
             <h2 className="text-xs font-semibold uppercase tracking-wider text-gold-light">
-              Zones couvertes
+              Secteurs — Région de Kolda
             </h2>
             <ul className="mt-4 space-y-2.5 text-sm text-slate-300">
               <li>
                 <Link
-                  href="/catalogue?location=Almadies"
+                  href="/catalogue?location=Bouna%20Kane"
                   className="transition-colors hover:text-white"
                 >
-                  Les Almadies &amp; Ngor — Dakar
+                  Bouna Kane &amp; Sikilo — Kolda
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/catalogue?location=Point%20E"
+                  href="/catalogue?location=Doumassou"
                   className="transition-colors hover:text-white"
                 >
-                  Point E, Mermoz &amp; Sacré-Cœur
+                  Doumassou, Gadapara &amp; HLM Kolda
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/catalogue?location=Diamniadio"
+                  href="/catalogue?location=Dioulacolon"
                   className="transition-colors hover:text-white"
                 >
-                  Pôle Urbain de Diamniadio
+                  Dioulacolon &amp; Saré Bidji
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/catalogue?location=Saly"
+                  href="/catalogue?location=V%C3%A9lingara"
                   className="transition-colors hover:text-white"
                 >
-                  Saly Portudal &amp; Mbour
+                  Vélingara &amp; Diaobé
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/catalogue?location=Lac%20Rose"
+                  href="/catalogue?location=M%C3%A9dina%20Yoro%20Foulah"
                   className="transition-colors hover:text-white"
                 >
-                  Lac Rose &amp; Thiès
+                  Médina Yoro Foulah &amp; Dabo
                 </Link>
               </li>
             </ul>
@@ -197,3 +198,4 @@ export function SiteFooter() {
     </footer>
   );
 }
+

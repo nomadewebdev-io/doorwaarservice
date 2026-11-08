@@ -6,11 +6,11 @@ import { Search } from 'lucide-react';
 
 const BUDGET_PRESETS = [
   { label: 'Tout budget', value: '' },
-  { label: 'Jusqu’à 500 000 FCFA (location)', value: '500000' },
-  { label: 'Jusqu’à 1 000 000 FCFA (location)', value: '1000000' },
-  { label: 'Jusqu’à 20 000 000 FCFA (terrain)', value: '20000000' },
-  { label: 'Jusqu’à 35 000 000 FCFA (terrain)', value: '35000000' },
-  { label: 'Jusqu’à 60 000 000 FCFA', value: '60000000' },
+  { label: 'Jusqu’à 250 000 FCFA (location)', value: '250000' },
+  { label: 'Jusqu’à 450 000 FCFA (location)', value: '450000' },
+  { label: 'Jusqu’à 6 000 000 FCFA (terrain)', value: '6000000' },
+  { label: 'Jusqu’à 12 000 000 FCFA (terrain)', value: '12000000' },
+  { label: 'Jusqu’à 25 000 000 FCFA', value: '25000000' },
 ];
 
 export function QuickSearchBar() {
@@ -68,22 +68,25 @@ export function QuickSearchBar() {
           <input
             id="quick-location"
             type="text"
-            list="senegal-locations"
+            list="kolda-locations"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            placeholder="Ex : Almadies, Diamniadio, Saly, Point E..."
+            placeholder="Ex : Bouna Kane, Sikilo, Vélingara, Diaobé..."
             className="h-11 w-full rounded-md border border-border-strong bg-canvas px-3 text-sm text-ink placeholder:text-ink-muted focus:border-navy focus:outline-none"
           />
-          <datalist id="senegal-locations">
-            <option value="Les Almadies" />
-            <option value="Ngor" />
-            <option value="Point E" />
-            <option value="Mermoz" />
-            <option value="Sacré-Cœur" />
-            <option value="Diamniadio" />
-            <option value="Saly Portudal" />
-            <option value="Lac Rose" />
-            <option value="Thiès" />
+          <datalist id="kolda-locations">
+            <option value="Kolda" />
+            <option value="Bouna Kane" />
+            <option value="Sikilo" />
+            <option value="Doumassou" />
+            <option value="Gadapara" />
+            <option value="HLM Kolda" />
+            <option value="Médina Chérif" />
+            <option value="Dioulacolon" />
+            <option value="Vélingara" />
+            <option value="Diaobé" />
+            <option value="Médina Yoro Foulah" />
+            <option value="Dabo" />
           </datalist>
         </div>
 
@@ -121,3 +124,4 @@ export function QuickSearchBar() {
     </form>
   );
 }
+

@@ -19,7 +19,7 @@ export function ListingGallery({ images, title }: ListingGalleryProps) {
             id: 'fallback',
             listing_id: 'fallback',
             storage_path: null,
-            image_url: '/images/listings/almadies-residence.jpg',
+            image_url: '/images/listings/kolda-residence.jpg',
             alt_text: title,
             sort_order: 0,
             is_cover: true,
@@ -182,3 +182,4 @@ export function ListingGallery({ images, title }: ListingGalleryProps) {
     </div>
   );
 }
+

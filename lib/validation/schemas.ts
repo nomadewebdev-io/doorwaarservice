@@ -218,3 +218,4 @@ export function validateListingInput(raw: Record<string, unknown>): ValidationRe
 export function isValidInquiryStatus(value: unknown): value is InquiryStatus {
   return value === 'nouvelle' || value === 'contactee' || value === 'planifiee' || value === 'cloturee';
 }
+

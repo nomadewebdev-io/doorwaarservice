@@ -12,7 +12,7 @@ interface ListingCardProps {
 
 export function ListingCard({ listing, variant = 'standard' }: ListingCardProps) {
   const coverImage =
-    listing.listing_images?.[0]?.image_url || '/images/listings/almadies-residence.jpg';
+    listing.listing_images?.[0]?.image_url || '/images/listings/kolda-residence.jpg';
   const coverAlt = listing.listing_images?.[0]?.alt_text || listing.title;
 
   if (variant === 'featured') {
@@ -168,3 +168,4 @@ export function ListingCard({ listing, variant = 'standard' }: ListingCardProps)
     </article>
   );
 }
+

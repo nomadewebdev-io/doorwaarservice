@@ -24,24 +24,26 @@ export const metadata: Metadata = {
     template: '%s | DoorWaarSERVICE',
   },
   description:
-    'DoorWaarSERVICE vous accompagne dans l’acquisition de terrains vérifiés et la location d’appartements meublés au Sénégal : Dakar, Diamniadio, Petite Côte et Thiès.',
+    'Basée à Kolda, l’agence DoorWaarSERVICE vous accompagne dans l’acquisition de terrains vérifiés et la location d’appartements meublés dans toute la région de Kolda (Haute-Casamance) : Kolda, Vélingara, Diaobé et Médina Yoro Foulah.',
   keywords: [
     'DoorWaarSERVICE',
-    'immobilier Sénégal',
-    'terrain à vendre Dakar',
-    'terrain Diamniadio',
-    'appartement meublé Dakar',
-    'Almadies',
-    'Saly',
-    'location meublée Sénégal',
+    'immobilier Kolda',
+    'terrain à vendre Kolda',
+    'terrain Vélingara',
+    'appartement meublé Kolda',
+    'Bouna Kane',
+    'Sikilo Kolda',
+    'Diaobé',
+    'Haute-Casamance',
+    'Sénégal',
   ],
   openGraph: {
     type: 'website',
     locale: 'fr_SN',
     siteName: 'DoorWaarSERVICE',
-    title: 'DoorWaarSERVICE | Terrains et appartements meublés au Sénégal',
+    title: 'DoorWaarSERVICE | Terrains et appartements meublés à Kolda',
     description:
-      'Terrains titrés ou viabilisés et appartements meublés prêts à vivre à Dakar, Diamniadio, Saly et Thiès.',
+      'Terrains titrés ou viabilisés et appartements meublés prêts à vivre à Kolda, Vélingara, Diaobé et Médina Yoro Foulah.',
   },
 };
 

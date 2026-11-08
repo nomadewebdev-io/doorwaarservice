@@ -49,3 +49,4 @@ export async function POST(request: Request, context: RouteContext) {
     return NextResponse.json({ error: 'Requête invalide.' }, { status: 400 });
   }
 }
+

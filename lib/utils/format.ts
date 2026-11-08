@@ -6,7 +6,7 @@ export const SITE_CONFIG = {
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '221770000000',
   contactPhone: process.env.NEXT_PUBLIC_CONTACT_PHONE || '+221 77 000 00 00',
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'contact@doorwaarservice.sn',
-  officeAddress: 'Sacré-Cœur 3, VDN — Dakar, Sénégal',
+  officeAddress: 'Quartier Bouna Kane, Route de Vélingara — Kolda, Sénégal',
   officeHours: 'Lundi – Samedi : 08h30 – 19h00',
 } as const;
 
@@ -52,7 +52,7 @@ export function buildWhatsAppDirectUrl(customMessage?: string): string {
   const cleanNumber = SITE_CONFIG.whatsappNumber.replace(/\D/g, '');
   const text =
     customMessage ||
-    'Bonjour DoorWaarSERVICE, je souhaite des informations sur vos terrains et appartements meublés au Sénégal.';
+    'Bonjour DoorWaarSERVICE, je souhaite des informations sur vos terrains et appartements meublés dans la région de Kolda.';
   return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(text)}`;
 }
 
@@ -88,3 +88,4 @@ export function serializeCsv(headers: string[], rows: unknown[][]): string {
   const dataLines = rows.map((row) => row.map(escapeCsvCell).join(';'));
   return `\uFEFF${[headerLine, ...dataLines].join('\r\n')}`;
 }
+

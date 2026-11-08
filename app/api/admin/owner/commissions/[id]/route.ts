@@ -54,3 +54,4 @@ export async function PATCH(request: Request, context: RouteContext) {
     return NextResponse.json({ error: 'Requête invalide.' }, { status: 400 });
   }
 }
+

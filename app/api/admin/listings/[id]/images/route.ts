@@ -137,3 +137,4 @@ export async function DELETE(request: Request, context: RouteContext) {
 
   return NextResponse.json({ ok: true });
 }
+

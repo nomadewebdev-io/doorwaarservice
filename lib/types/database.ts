@@ -140,3 +140,4 @@ export interface CatalogFilters {
   status?: ListingStatus | 'tous';
   sort?: CatalogSortOption;
 }
+

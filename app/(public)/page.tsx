@@ -33,7 +33,7 @@ export default async function HomePage() {
             <div className="lg:col-span-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-navy-soft bg-navy-deep/70 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-gold-light">
                 <MapPin className="h-3.5 w-3.5" strokeWidth={1.75} />
-                <span>Dakar • Diamniadio • Petite Côte • Thiès</span>
+                <span>Kolda • Vélingara • Diaobé • Médina Yoro Foulah</span>
               </div>
 
               <h1 className="mt-5 font-display text-3xl font-bold leading-[1.12] tracking-tight text-white sm:text-5xl">
@@ -41,9 +41,9 @@ export default async function HomePage() {
               </h1>
 
               <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
-                DoorWaarSERVICE sélectionne des parcelles au dossier foncier vérifié et des
-                appartements meublés prêts à vivre. Prix transparents en FCFA, visites rapides
-                et suivi rigoureux jusqu’à la signature.
+                Basée à Kolda, l’agence DoorWaarSERVICE concentre son expertise sur la région de
+                Kolda : parcelles au dossier foncier vérifié et appartements meublés prêts à vivre,
+                avec prix nets en FCFA et accompagnement jusqu’à la signature.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3.5">
@@ -97,8 +97,8 @@ export default async function HomePage() {
               <div className="relative overflow-hidden rounded-xl border border-white/15 bg-navy-deep">
                 <div className="relative aspect-[16/10] w-full">
                   <Image
-                    src="/images/listings/almadies-residence.jpg"
-                    alt="Résidence contemporaine gérée par DoorWaarSERVICE aux Almadies à Dakar"
+                    src="/images/listings/kolda-residence.jpg"
+                    alt="Résidence contemporaine gérée par DoorWaarSERVICE à Bouna Kane, Kolda"
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -107,10 +107,10 @@ export default async function HomePage() {
                 </div>
                 <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 bg-navy-deep px-5 py-3.5 text-xs">
                   <span className="font-semibold text-gold-light">
-                    Sélection vérifiée DoorWaarSERVICE
+                    Région de Kolda — Haute-Casamance
                   </span>
                   <span className="text-slate-300">
-                    Les Almadies • Diamniadio • Saly Portudal
+                    Bouna Kane • Sikilo • Vélingara • Diaobé
                   </span>
                 </div>
               </div>
@@ -178,12 +178,13 @@ export default async function HomePage() {
                   Pourquoi DoorWaarSERVICE
                 </p>
                 <h2 className="mt-3 font-display text-2xl font-bold leading-snug sm:text-3xl">
-                  Un partenaire de terrain exigeant pour sécuriser votre projet au Sénégal.
+                  Un partenaire de terrain ancré à Kolda pour sécuriser votre projet en
+                  Haute-Casamance.
                 </h2>
                 <p className="mt-4 text-sm leading-relaxed text-slate-300">
-                  Acheter un terrain ou réserver un appartement meublé à distance ou depuis Dakar
-                  demande des preuves tangibles, des prix nets en FCFA et un interlocuteur
-                  joignable à chaque étape.
+                  Acquérir un terrain ou réserver un appartement meublé à Kolda et dans ses
+                  départements demande des dossiers fonciers contrôlés sur place, des prix nets en
+                  FCFA et un interlocuteur réactif à chaque étape.
                 </p>
               </div>
 
@@ -220,8 +221,9 @@ export default async function HomePage() {
                   Appartements meublés prêts à vivre
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-secondary">
-                  Fibre optique testée, climatisation entretenue, secours électrique (groupe ou
-                  onduleur) et gardiennage 24/7 pour séjours d’affaires, diaspora ou familles.
+                  Connexion internet haut débit, climatisation entretenue, secours énergétique
+                  (solaire ou groupe) et gardiennage permanent pour missions, ONG, cadres ou
+                  familles.
                 </p>
               </div>
 
@@ -264,7 +266,7 @@ export default async function HomePage() {
                 Parler à un conseiller
               </p>
               <h2 className="mt-2 font-display text-2xl font-bold text-navy sm:text-3xl">
-                Un terrain à visiter ou un séjour à planifier à Dakar ?
+                Un terrain à visiter ou un séjour à planifier à Kolda ?
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-secondary">
                 Indiquez-nous votre secteur et votre budget en FCFA : notre équipe vous propose
@@ -325,3 +327,4 @@ export default async function HomePage() {
     </div>
   );
 }
+

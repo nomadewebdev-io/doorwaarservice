@@ -195,3 +195,4 @@ export function MarkSoldModal({ listing, onClose, onSuccess }: MarkSoldModalProp
     </div>
   );
 }
+

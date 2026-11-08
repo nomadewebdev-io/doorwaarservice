@@ -97,7 +97,7 @@ export function InquiryForm({
                 : 'Message transmis à DoorWaarSERVICE'}
             </h3>
             <p className="mt-1.5 text-sm leading-relaxed text-emerald-900">
-              Un conseiller basé à Dakar vous recontactera sous peu par{' '}
+              Un conseiller basé à Kolda vous recontactera sous peu par{' '}
               {preferredChannel === 'whatsapp'
                 ? 'WhatsApp'
                 : preferredChannel === 'telephone'
@@ -273,3 +273,4 @@ export function InquiryForm({
     </form>
   );
 }
+

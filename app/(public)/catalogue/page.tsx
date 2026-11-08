@@ -10,9 +10,9 @@ import { buildWhatsAppDirectUrl } from '@/lib/utils/format';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Catalogue des terrains et appartements meublés',
+  title: 'Catalogue des terrains et appartements meublés — Région de Kolda',
   description:
-    'Consultez nos terrains titrés à vendre et nos appartements meublés à louer à Dakar, Diamniadio, Saly Portudal, Lac Rose et Thiès.',
+    'Consultez nos terrains vérifiés à vendre et nos appartements meublés à louer à Kolda (Bouna Kane, Sikilo, Doumassou, Gadapara), Vélingara, Diaobé et Médina Yoro Foulah.',
 };
 
 interface CataloguePageProps {
@@ -163,3 +163,4 @@ export default async function CataloguePage({ searchParams }: CataloguePageProps
     </div>
   );
 }
+

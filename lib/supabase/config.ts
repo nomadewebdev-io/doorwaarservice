@@ -20,3 +20,4 @@ export function getSupabaseEnv(): { url: string; anonKey: string } {
   }
   return { url, anonKey };
 }
+

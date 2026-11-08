@@ -185,7 +185,7 @@ export function AgentListingsManager({ initialListings }: AgentListingsManagerPr
         <div className="space-y-3">
           {filtered.map((listing) => {
             const cover =
-              listing.listing_images?.[0]?.image_url || '/images/listings/almadies-residence.jpg';
+              listing.listing_images?.[0]?.image_url || '/images/listings/kolda-residence.jpg';
             const isVendu = listing.status === 'vendu';
             const isBusy = busyId === listing.id;
 
@@ -329,3 +329,4 @@ export function AgentListingsManager({ initialListings }: AgentListingsManagerPr
     </div>
   );
 }
+

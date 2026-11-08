@@ -4,9 +4,9 @@ import { InquiryForm } from '@/components/public/InquiryForm';
 import { SITE_CONFIG, buildWhatsAppDirectUrl } from '@/lib/utils/format';
 
 export const metadata: Metadata = {
-  title: 'Contactez DoorWaarSERVICE',
+  title: 'Contactez DoorWaarSERVICE Kolda',
   description:
-    'Contactez notre équipe à Dakar par WhatsApp, téléphone ou formulaire pour planifier une visite de terrain ou réserver un appartement meublé au Sénégal.',
+    'Contactez notre équipe basée à Kolda par WhatsApp, téléphone ou formulaire pour planifier une visite de terrain ou réserver un appartement meublé dans la région de Kolda.',
 };
 
 export default function ContactPage() {
@@ -21,9 +21,9 @@ export default function ContactPage() {
             Échanger avec un conseiller DoorWaarSERVICE
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-ink-secondary sm:text-base">
-            Que vous recherchiez un terrain titré à Diamniadio, Saly ou Lac Rose, ou un
-            appartement meublé à Dakar, laissez-nous vos critères ou joignez-nous directement sur
-            WhatsApp.
+            Que vous recherchiez un terrain vérifié à Kolda, Dioulacolon, Vélingara ou Diaobé, ou
+            un appartement meublé au cœur de Kolda, laissez-nous vos critères ou joignez notre
+            bureau sur WhatsApp.
           </p>
         </div>
 
@@ -31,7 +31,7 @@ export default function ContactPage() {
           <div className="space-y-6 lg:col-span-5">
             <div className="rounded-xl border border-border-subtle bg-navy p-6 text-white sm:p-7">
               <h2 className="font-display text-lg font-bold text-white">
-                Canaux directs — Dakar
+                Canaux directs — Kolda
               </h2>
               <p className="mt-1.5 text-xs text-slate-300">
                 Réponse rapide durant les heures de bureau et prise de rendez-vous le samedi.
@@ -137,3 +137,4 @@ export default function ContactPage() {
     </div>
   );
 }
+

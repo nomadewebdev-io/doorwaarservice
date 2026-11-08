@@ -1,6 +1,6 @@
-# DoorWaarSERVICE — Plateforme Immobilière (Sénégal)
+# DoorWaarSERVICE — Plateforme Immobilière (Kolda, Sénégal)
 
-Site web immobilier complet pour **DoorWaarSERVICE** (*Terrains et appartements meublés au Sénégal*), conçu avec **Next.js (App Router)**, **Tailwind CSS** et **Supabase** (Auth, PostgreSQL, RLS strictes et Storage).
+Site web immobilier complet pour **DoorWaarSERVICE** (*Terrains et appartements meublés au Sénégal* — activité dédiée à la région de Kolda / Haute-Casamance), conçu avec **Next.js (App Router)**, **Tailwind CSS** et **Supabase** (Auth, PostgreSQL, RLS strictes et Storage).
 
 ## 1. Démarrage local
 
@@ -27,7 +27,7 @@ Site web immobilier complet pour **DoorWaarSERVICE** (*Terrains et appartements 
    - Active les politiques **RLS strictes** par rôle (`agent` et `owner`) ainsi que l'insertion publique sur `inquiries`.
    - Installe la fonction transactionnelle `mark_listing_sold(...)` et le trigger calculant automatiquement la commission à chaque vente.
    - Crée le bucket public `listing-images` pour les photos.
-3. (Optionnel) Exécutez [supabase/seed.sql](./supabase/seed.sql) pour charger des annonces initiales au Sénégal.
+3. (Optionnel) Exécutez [supabase/seed.sql](./supabase/seed.sql) pour charger les annonces initiales de la région de Kolda.
 4. Créez vos comptes dans **Authentication → Users**, puis associez leur rôle dans `public.profiles` :
    ```sql
    insert into public.profiles (id, email, full_name, role)

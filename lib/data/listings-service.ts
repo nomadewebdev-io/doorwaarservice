@@ -183,3 +183,4 @@ export async function getAvailableLocations(): Promise<string[]> {
   }
   return Array.from(locations).sort((a, b) => a.localeCompare(b, 'fr'));
 }
+

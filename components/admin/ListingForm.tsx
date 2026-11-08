@@ -39,7 +39,7 @@ export function ListingForm({ mode, initialListing }: ListingFormProps) {
   const [pricePeriod, setPricePeriod] = useState<PricePeriod>(
     initialListing?.price_period ?? 'total',
   );
-  const [city, setCity] = useState(initialListing?.city ?? 'Dakar');
+  const [city, setCity] = useState(initialListing?.city ?? 'Kolda');
   const [neighborhood, setNeighborhood] = useState(initialListing?.neighborhood ?? '');
   const [addressLandmark, setAddressLandmark] = useState(
     initialListing?.address_landmark ?? '',
@@ -290,7 +290,7 @@ export function ListingForm({ mode, initialListing }: ListingFormProps) {
             required
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Ex : Terrain viabilisé 400 m² en Titre Foncier à Diamniadio"
+            placeholder="Ex : Terrain borné 400 m² en Titre Foncier à Bouna Kane, Kolda"
             className="h-11 w-full rounded-md border border-border-strong bg-canvas px-3 text-sm text-ink focus:border-navy focus:outline-none"
           />
           {fieldErrors.title ? (
@@ -311,7 +311,7 @@ export function ListingForm({ mode, initialListing }: ListingFormProps) {
               step={1000}
               value={priceFcfa}
               onChange={(e) => setPriceFcfa(e.target.value)}
-              placeholder="Ex : 28000000"
+              placeholder="Ex : 8500000"
               className="h-11 w-full rounded-md border border-border-strong bg-canvas px-3 text-sm font-semibold text-navy tabular-nums focus:border-navy focus:outline-none"
             />
             {Number(priceFcfa) > 0 ? (
@@ -438,7 +438,7 @@ export function ListingForm({ mode, initialListing }: ListingFormProps) {
               required
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              placeholder="Dakar, Diamniadio, Mbour..."
+              placeholder="Kolda, Vélingara, Diaobé..."
               className="h-11 w-full rounded-md border border-border-strong bg-canvas px-3 text-sm text-ink focus:border-navy focus:outline-none"
             />
             {fieldErrors.city ? (
@@ -459,7 +459,7 @@ export function ListingForm({ mode, initialListing }: ListingFormProps) {
               required
               value={neighborhood}
               onChange={(e) => setNeighborhood(e.target.value)}
-              placeholder="Les Almadies, Saly Portudal..."
+              placeholder="Bouna Kane, Sikilo, Doumassou..."
               className="h-11 w-full rounded-md border border-border-strong bg-canvas px-3 text-sm text-ink focus:border-navy focus:outline-none"
             />
             {fieldErrors.neighborhood ? (
@@ -476,7 +476,7 @@ export function ListingForm({ mode, initialListing }: ListingFormProps) {
               type="text"
               value={addressLandmark}
               onChange={(e) => setAddressLandmark(e.target.value)}
-              placeholder="Ex : À 4 min de la gare TER"
+              placeholder="Ex : À 3 min de la Route Nationale n°6"
               className="h-11 w-full rounded-md border border-border-strong bg-canvas px-3 text-sm text-ink focus:border-navy focus:outline-none"
             />
           </div>
@@ -673,3 +673,4 @@ export function ListingForm({ mode, initialListing }: ListingFormProps) {
     </form>
   );
 }
+

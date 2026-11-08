@@ -12,21 +12,21 @@ import {
 import { SITE_CONFIG, buildWhatsAppDirectUrl } from '@/lib/utils/format';
 
 export const metadata: Metadata = {
-  title: 'À propos de DoorWaarSERVICE',
+  title: 'À propos de DoorWaarSERVICE — Kolda',
   description:
-    'Découvrez l’approche de DoorWaarSERVICE : sécurisation foncière au Sénégal, gestion d’appartements meublés à Dakar et transparence financière en FCFA.',
+    'Découvrez l’approche de DoorWaarSERVICE à Kolda : sécurisation foncière en Haute-Casamance, gestion d’appartements meublés à Kolda et transparence financière en FCFA.',
 };
 
 const PROCESS_STEPS = [
   {
     step: '01',
     title: 'Sélection et audit du bien',
-    text: 'Chaque parcelle est contrôlée sur le plan administratif (Titre Foncier, Bail ou Délibération) et chaque appartement meublé est inspecté sur la qualité de ses équipements (eau, électricité secourue, fibre).',
+    text: 'Chaque parcelle est contrôlée sur le plan administratif (Titre Foncier, Bail ou Délibération) et chaque appartement meublé est inspecté sur la qualité de ses équipements (eau, électricité secourue, connexion internet).',
   },
   {
     step: '02',
     title: 'Visite sur site ou en vidéo directe',
-    text: 'Nos conseillers organisent la visite physique à Dakar, Diamniadio, sur la Petite Côte ou à Thiès, ou réalisent une visite vidéo commentée pour nos clients résidant à l’étranger.',
+    text: 'Nos conseillers organisent la visite physique à Kolda, Dioulacolon, Vélingara, Diaobé ou Médina Yoro Foulah, ou réalisent une visite vidéo commentée pour nos clients de la diaspora.',
   },
   {
     step: '03',
@@ -53,9 +53,10 @@ export default function AboutPage() {
             d’accueil.
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300">
-            {SITE_CONFIG.slogan}. Nous accompagnons particuliers, investisseurs locaux et membres
-            de la diaspora dans deux métiers complémentaires : l’acquisition de terrains vérifiés
-            et la location d’appartements meublés prêts à vivre.
+            {SITE_CONFIG.slogan}. Implantée à Kolda, notre équipe concentre son action sur
+            l’ensemble de la région de Kolda (Haute-Casamance) pour accompagner résidents, ONG,
+            investisseurs et diaspora sur deux métiers : l’acquisition de terrains vérifiés et la
+            location d’appartements meublés prêts à vivre.
           </p>
         </div>
       </section>
@@ -70,10 +71,11 @@ export default function AboutPage() {
               Pôle Foncier &amp; Terrains
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-ink-secondary">
-              L’achat d’un terrain au Sénégal exige une vigilance absolue sur la nature juridique
-              de la parcelle, l’accès routier, la viabilisation et l’absence de litige. Nous
-              concentrons notre catalogue sur des zones à fort potentiel — Diamniadio, Lac Rose,
-              Saly, Somone, Thiès et Dakar — avec dossier vérifiable avant toute transaction.
+              L’achat d’un terrain dans le Fouladou exige une vigilance absolue sur la nature
+              juridique de la parcelle, l’accès routier, l’absence d’inondation et l’absence de
+              litige. Nous concentrons notre catalogue sur la région de Kolda — Bouna Kane, Sikilo,
+              Dioulacolon, Saré Bidji, Vélingara, Diaobé et Médina Yoro Foulah — avec dossier
+              vérifiable avant toute transaction.
             </p>
             <ul className="mt-5 space-y-2 text-sm text-navy">
               <li className="flex items-center gap-2">
@@ -99,9 +101,10 @@ export default function AboutPage() {
               Pôle Appartements Meublés
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-ink-secondary">
-              Nous sélectionnons des studios, F3 et F4 meublés dans les quartiers recherchés de
-              Dakar (Les Almadies, Ngor, Point E, Mermoz, Sacré-Cœur, Plateau). Nos logements sont
-              pensés pour les cadres en mission, diplomates, consultants et familles en séjour.
+              Nous sélectionnons des studios, F3 et F4 meublés dans les quartiers calmes et
+              accessibles de Kolda (Bouna Kane, Doumassou, Sikilo, Gadapara, HLM). Nos logements
+              sont pensés pour les agents de projets et ONG, cadres en mission, visiteurs et
+              familles de la diaspora.
             </p>
             <ul className="mt-5 space-y-2 text-sm text-navy">
               <li className="flex items-center gap-2">
@@ -173,7 +176,7 @@ export default function AboutPage() {
           <div className="flex flex-wrap gap-3">
             <a
               href={buildWhatsAppDirectUrl(
-                'Bonjour DoorWaarSERVICE, je souhaite vous confier un bien immobilier au Sénégal.',
+                'Bonjour DoorWaarSERVICE, je souhaite vous confier un bien immobilier dans la région de Kolda.',
               )}
               target="_blank"
               rel="noopener noreferrer"
@@ -196,3 +199,4 @@ export default function AboutPage() {
     </div>
   );
 }
+
