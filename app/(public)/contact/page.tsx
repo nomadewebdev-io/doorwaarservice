@@ -1,12 +1,11 @@
 import type { Metadata } from 'next';
 import { Clock, Mail, MapPin, MessageCircle, Phone, Wallet } from 'lucide-react';
 import { InquiryForm } from '@/components/public/InquiryForm';
-import { SITE_CONFIG, buildWhatsAppDirectUrl } from '@/lib/utils/format';
+import { siteConfig, buildWhatsAppUrl } from '@/src/config/site';
 
 export const metadata: Metadata = {
-  title: 'Contactez DoorWaarSERVICE Kolda',
-  description:
-    'Contactez notre équipe basée à Kolda par WhatsApp, téléphone ou formulaire pour planifier une visite de terrain ou réserver un appartement meublé dans la région de Kolda.',
+  title: `Contactez ${siteConfig.name} — ${siteConfig.zone}`,
+  description: `Contactez notre équipe basée à ${siteConfig.zone} par WhatsApp, téléphone ou formulaire pour planifier une visite de terrain ou réserver un appartement meublé dans la région de ${siteConfig.zone}.`,
 };
 
 export default function ContactPage() {
@@ -18,12 +17,11 @@ export default function ContactPage() {
             Contact &amp; rendez-vous
           </p>
           <h1 className="mt-1.5 font-display text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-            Échanger avec un conseiller DoorWaarSERVICE
+            Échanger avec un conseiller {siteConfig.name}
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-ink-secondary sm:text-base">
-            Que vous recherchiez un terrain vérifié à Kolda, Dioulacolon, Vélingara ou Diaobé, ou
-            un appartement meublé au cœur de Kolda, laissez-nous vos critères ou joignez notre
-            bureau sur WhatsApp.
+            Que vous recherchiez un terrain vérifié ou un appartement meublé à {siteConfig.zone},
+            laissez-nous vos critères ou joignez notre bureau sur WhatsApp.
           </p>
         </div>
 
@@ -31,67 +29,97 @@ export default function ContactPage() {
           <div className="space-y-6 lg:col-span-5">
             <div className="rounded-xl border border-border-subtle bg-navy p-6 text-white sm:p-7">
               <h2 className="font-display text-lg font-bold text-white">
-                Canaux directs — Kolda
+                Canaux directs — {siteConfig.zone}
               </h2>
               <p className="mt-1.5 text-xs text-slate-300">
                 Réponse rapide durant les heures de bureau et prise de rendez-vous le samedi.
               </p>
 
               <ul className="mt-6 space-y-4 text-sm">
-                <li className="flex items-start gap-3">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
-                  <div>
-                    <span className="block text-xs uppercase tracking-wider text-slate-400">
-                      Adresse du bureau
-                    </span>
-                    <span className="font-medium text-white">{SITE_CONFIG.officeAddress}</span>
-                  </div>
-                </li>
+                {/* Téléphone direct */}
+                {siteConfig.phone.display ? (
+                  <li className="flex items-start gap-3">
+                    <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
+                    <div>
+                      <span className="block text-xs uppercase tracking-wider text-slate-400">
+                        Téléphone
+                      </span>
+                      <a
+                        href={`tel:${siteConfig.phone.raw}`}
+                        className="font-semibold text-white hover:text-gold-light"
+                      >
+                        {siteConfig.phone.display}
+                      </a>
+                    </div>
+                  </li>
+                ) : null}
 
+                {/* WhatsApp direct */}
                 <li className="flex items-start gap-3">
-                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
+                  <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
                   <div>
                     <span className="block text-xs uppercase tracking-wider text-slate-400">
-                      Téléphone
+                      WhatsApp direct
                     </span>
                     <a
-                      href={`tel:${SITE_CONFIG.contactPhone.replace(/\s+/g, '')}`}
+                      href={buildWhatsAppUrl()}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="font-semibold text-white hover:text-gold-light"
                     >
-                      {SITE_CONFIG.contactPhone}
+                      {siteConfig.whatsapp.display}
                     </a>
                   </div>
                 </li>
 
-                <li className="flex items-start gap-3">
-                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
-                  <div>
-                    <span className="block text-xs uppercase tracking-wider text-slate-400">
-                      E-mail
-                    </span>
-                    <a
-                      href={`mailto:${SITE_CONFIG.contactEmail}`}
-                      className="font-medium text-white hover:text-gold-light"
-                    >
-                      {SITE_CONFIG.contactEmail}
-                    </a>
-                  </div>
-                </li>
+                {/* Adresse - masquée si non renseignée */}
+                {siteConfig.address ? (
+                  <li className="flex items-start gap-3">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
+                    <div>
+                      <span className="block text-xs uppercase tracking-wider text-slate-400">
+                        Adresse du bureau
+                      </span>
+                      <span className="font-medium text-white">{siteConfig.address}</span>
+                    </div>
+                  </li>
+                ) : null}
 
-                <li className="flex items-start gap-3">
-                  <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
-                  <div>
-                    <span className="block text-xs uppercase tracking-wider text-slate-400">
-                      Horaires d’accueil
-                    </span>
-                    <span className="text-slate-200">{SITE_CONFIG.officeHours}</span>
-                  </div>
-                </li>
+                {/* Email - masqué si non renseigné */}
+                {siteConfig.email ? (
+                  <li className="flex items-start gap-3">
+                    <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
+                    <div>
+                      <span className="block text-xs uppercase tracking-wider text-slate-400">
+                        E-mail
+                      </span>
+                      <a
+                        href={`mailto:${siteConfig.email}`}
+                        className="font-medium text-white hover:text-gold-light"
+                      >
+                        {siteConfig.email}
+                      </a>
+                    </div>
+                  </li>
+                ) : null}
+
+                {/* Horaires - masqués si non renseignés */}
+                {siteConfig.hours ? (
+                  <li className="flex items-start gap-3">
+                    <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
+                    <div>
+                      <span className="block text-xs uppercase tracking-wider text-slate-400">
+                        Horaires d’accueil
+                      </span>
+                      <span className="text-slate-200">{siteConfig.hours}</span>
+                    </div>
+                  </li>
+                ) : null}
               </ul>
 
               <div className="mt-7 border-t border-white/15 pt-5">
                 <a
-                  href={buildWhatsAppDirectUrl()}
+                  href={buildWhatsAppUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-md bg-gold px-4 text-sm font-bold text-navy-deep transition-colors hover:bg-gold-light"
@@ -137,4 +165,3 @@ export default function ContactPage() {
     </div>
   );
 }
-

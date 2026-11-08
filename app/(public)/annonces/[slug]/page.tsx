@@ -18,12 +18,11 @@ import { ListingGallery } from '@/components/public/ListingGallery';
 import { StatusBadge } from '@/components/public/StatusBadge';
 import { getListingBySlugOrId } from '@/lib/data/listings-service';
 import {
-  SITE_CONFIG,
-  buildWhatsAppListingUrl,
   formatDateFr,
   formatListingPrice,
   getPropertyTypeLabel,
 } from '@/lib/utils/format';
+import { siteConfig, buildWhatsAppUrl } from '@/src/config/site';
 
 export const dynamic = 'force-dynamic';
 
@@ -49,7 +48,7 @@ export async function generateMetadata({
     title: `${listing.title} — ${priceText}`,
     description: `${getPropertyTypeLabel(listing.property_type)} à ${listing.neighborhood}, ${listing.city}. ${priceText}. ${listing.description.slice(0, 130)}`,
     openGraph: {
-      title: `${listing.title} | DoorWaarSERVICE`,
+      title: `${listing.title} | ${siteConfig.name}`,
       description: `${listing.neighborhood}, ${listing.city} — ${priceText}`,
       images: coverImage ? [{ url: coverImage }] : undefined,
     },
@@ -64,14 +63,7 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
     notFound();
   }
 
-  const whatsappUrl = buildWhatsAppListingUrl({
-    title: listing.title,
-    city: listing.city,
-    neighborhood: listing.neighborhood,
-    priceFcfa: listing.price_fcfa,
-    pricePeriod: listing.price_period,
-  });
-
+  const whatsappUrl = buildWhatsAppUrl(listing.title);
   const isSold = listing.status === 'vendu';
 
   return (
@@ -264,19 +256,21 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
                   </span>
                 </a>
 
-                <a
-                  href={`tel:${SITE_CONFIG.contactPhone.replace(/\s+/g, '')}`}
-                  className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-md border border-border-strong bg-canvas px-4 text-sm font-semibold text-navy transition-colors hover:bg-sand"
-                >
-                  <Phone className="h-4 w-4 text-gold-text" strokeWidth={1.75} />
-                  <span>Appeler : {SITE_CONFIG.contactPhone}</span>
-                </a>
+                {siteConfig.phone.display ? (
+                  <a
+                    href={`tel:${siteConfig.phone.raw}`}
+                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-md border border-border-strong bg-canvas px-4 text-sm font-semibold text-navy transition-colors hover:bg-sand"
+                  >
+                    <Phone className="h-4 w-4 text-gold-text" strokeWidth={1.75} />
+                    <span>Appeler : {siteConfig.phone.display}</span>
+                  </a>
+                ) : null}
               </div>
 
               <div className="mt-4 flex items-center gap-2 rounded-lg bg-sand/70 px-3.5 py-2.5 text-xs text-ink-secondary">
                 <ShieldCheck className="h-4 w-4 shrink-0 text-gold-text" strokeWidth={1.75} />
                 <span>
-                  Dossier vérifié par DoorWaarSERVICE — visite physique ou en visio pour la
+                  Dossier vérifié par {siteConfig.name} — visite physique ou en visio pour la
                   diaspora.
                 </span>
               </div>
@@ -311,4 +305,3 @@ export default async function ListingDetailPage({ params }: ListingDetailPagePro
     </div>
   );
 }
-

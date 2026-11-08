@@ -178,8 +178,8 @@ export async function getAvailableLocations(): Promise<string[]> {
   const listings = await getPublicListings();
   const locations = new Set<string>();
   for (const item of listings) {
-    locations.add(item.city);
-    locations.add(item.neighborhood);
+    if (item.city && item.city.trim()) locations.add(item.city.trim());
+    if (item.neighborhood && item.neighborhood.trim()) locations.add(item.neighborhood.trim());
   }
   return Array.from(locations).sort((a, b) => a.localeCompare(b, 'fr'));
 }

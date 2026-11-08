@@ -9,12 +9,11 @@ import {
   Landmark,
   MessageCircle,
 } from 'lucide-react';
-import { SITE_CONFIG, buildWhatsAppDirectUrl } from '@/lib/utils/format';
+import { siteConfig, buildWhatsAppUrl } from '@/src/config/site';
 
 export const metadata: Metadata = {
-  title: 'À propos de DoorWaarSERVICE — Kolda',
-  description:
-    'Découvrez l’approche de DoorWaarSERVICE à Kolda : sécurisation foncière en Haute-Casamance, gestion d’appartements meublés à Kolda et transparence financière en FCFA.',
+  title: `À propos de ${siteConfig.name} — ${siteConfig.zone}`,
+  description: `Découvrez l’approche de ${siteConfig.name} à ${siteConfig.zone} : sécurisation foncière en région de ${siteConfig.zone}, gestion d’appartements meublés et transparence financière en FCFA.`,
 };
 
 const PROCESS_STEPS = [
@@ -26,7 +25,7 @@ const PROCESS_STEPS = [
   {
     step: '02',
     title: 'Visite sur site ou en vidéo directe',
-    text: 'Nos conseillers organisent la visite physique à Kolda, Dioulacolon, Vélingara, Diaobé ou Médina Yoro Foulah, ou réalisent une visite vidéo commentée pour nos clients de la diaspora.',
+    text: `Nos conseillers organisent la visite physique sur place à ${siteConfig.zone} et dans sa région, ou réalisent une visite vidéo commentée pour nos clients de la diaspora.`,
   },
   {
     step: '03',
@@ -46,15 +45,15 @@ export default function AboutPage() {
       <section className="border-b border-border-subtle bg-navy py-14 text-white sm:py-18">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-wider text-gold-light">
-            À propos de {SITE_CONFIG.name}
+            À propos de {siteConfig.name}
           </p>
           <h1 className="mt-3 max-w-3xl font-display text-3xl font-bold leading-tight sm:text-4xl">
             Une agence immobilière sénégalaise bâtie sur la clarté foncière et la qualité
             d’accueil.
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300">
-            {SITE_CONFIG.slogan}. Implantée à Kolda, notre équipe concentre son action sur
-            l’ensemble de la région de Kolda (Haute-Casamance) pour accompagner résidents, ONG,
+            {siteConfig.slogan}. Implantée à {siteConfig.zone}, notre équipe concentre son action sur
+            l’ensemble de la région de {siteConfig.zone} pour accompagner résidents, ONG,
             investisseurs et diaspora sur deux métiers : l’acquisition de terrains vérifiés et la
             location d’appartements meublés prêts à vivre.
           </p>
@@ -73,9 +72,8 @@ export default function AboutPage() {
             <p className="mt-3 text-sm leading-relaxed text-ink-secondary">
               L’achat d’un terrain dans le Fouladou exige une vigilance absolue sur la nature
               juridique de la parcelle, l’accès routier, l’absence d’inondation et l’absence de
-              litige. Nous concentrons notre catalogue sur la région de Kolda — Bouna Kane, Sikilo,
-              Dioulacolon, Saré Bidji, Vélingara, Diaobé et Médina Yoro Foulah — avec dossier
-              vérifiable avant toute transaction.
+              litige. Nous concentrons notre catalogue sur la région de {siteConfig.zone} avec un
+              dossier vérifiable avant toute transaction.
             </p>
             <ul className="mt-5 space-y-2 text-sm text-navy">
               <li className="flex items-center gap-2">
@@ -101,10 +99,9 @@ export default function AboutPage() {
               Pôle Appartements Meublés
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-ink-secondary">
-              Nous sélectionnons des studios, F3 et F4 meublés dans les quartiers calmes et
-              accessibles de Kolda (Bouna Kane, Doumassou, Sikilo, Gadapara, HLM). Nos logements
-              sont pensés pour les agents de projets et ONG, cadres en mission, visiteurs et
-              familles de la diaspora.
+              Nous sélectionnons des studios, F3 et F4 meublés dans les secteurs calmes et
+              accessibles de {siteConfig.zone}. Nos logements sont pensés pour les agents de projets
+              et ONG, cadres en mission, visiteurs et familles de la diaspora.
             </p>
             <ul className="mt-5 space-y-2 text-sm text-navy">
               <li className="flex items-center gap-2">
@@ -166,7 +163,7 @@ export default function AboutPage() {
               <span>Propriétaires &amp; vendeurs</span>
             </div>
             <h2 className="mt-2 font-display text-2xl font-bold">
-              Vous souhaitez confier un terrain titré ou un appartement meublé à DoorWaarSERVICE ?
+              Vous souhaitez confier un terrain titré ou un appartement meublé à {siteConfig.name} ?
             </h2>
             <p className="mt-2 text-sm text-slate-300">
               Contactez notre direction pour une visite d’évaluation et une mise en vente ou en
@@ -175,8 +172,9 @@ export default function AboutPage() {
           </div>
           <div className="flex flex-wrap gap-3">
             <a
-              href={buildWhatsAppDirectUrl(
-                'Bonjour DoorWaarSERVICE, je souhaite vous confier un bien immobilier dans la région de Kolda.',
+              href={buildWhatsAppUrl(
+                null,
+                `Bonjour ${siteConfig.name}, je souhaite vous confier un bien immobilier dans la région de ${siteConfig.zone}.`,
               )}
               target="_blank"
               rel="noopener noreferrer"
@@ -199,4 +197,3 @@ export default function AboutPage() {
     </div>
   );
 }
-

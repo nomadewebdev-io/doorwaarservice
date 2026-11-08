@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
+import { siteConfig, getLocalBusinessJsonLd } from '@/src/config/site';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -15,35 +16,20 @@ const plusJakarta = Plus_Jakarta_Sans({
   display: 'swap',
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteConfig.siteUrl),
   title: {
-    default: 'DoorWaarSERVICE | Terrains et appartements meublés au Sénégal',
-    template: '%s | DoorWaarSERVICE',
+    default: siteConfig.seo.title,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    'Basée à Kolda, l’agence DoorWaarSERVICE vous accompagne dans l’acquisition de terrains vérifiés et la location d’appartements meublés dans toute la région de Kolda (Haute-Casamance) : Kolda, Vélingara, Diaobé et Médina Yoro Foulah.',
-  keywords: [
-    'DoorWaarSERVICE',
-    'immobilier Kolda',
-    'terrain à vendre Kolda',
-    'terrain Vélingara',
-    'appartement meublé Kolda',
-    'Bouna Kane',
-    'Sikilo Kolda',
-    'Diaobé',
-    'Haute-Casamance',
-    'Sénégal',
-  ],
+  description: siteConfig.seo.description,
+  keywords: [...siteConfig.seo.keywords],
   openGraph: {
     type: 'website',
     locale: 'fr_SN',
-    siteName: 'DoorWaarSERVICE',
-    title: 'DoorWaarSERVICE | Terrains et appartements meublés à Kolda',
-    description:
-      'Terrains titrés ou viabilisés et appartements meublés prêts à vivre à Kolda, Vélingara, Diaobé et Médina Yoro Foulah.',
+    siteName: siteConfig.name,
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
   },
 };
 
@@ -52,11 +38,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = getLocalBusinessJsonLd();
+
   return (
     <html
       lang="fr"
       className={`${inter.variable} ${plusJakarta.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-canvas text-ink">
         {children}
       </body>

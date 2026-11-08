@@ -13,7 +13,11 @@ const BUDGET_PRESETS = [
   { label: 'Jusqu’à 25 000 000 FCFA', value: '25000000' },
 ];
 
-export function QuickSearchBar() {
+interface QuickSearchBarProps {
+  locations?: string[];
+}
+
+export function QuickSearchBar({ locations = [] }: QuickSearchBarProps) {
   const router = useRouter();
   const [propertyType, setPropertyType] = useState<'tous' | 'terrain' | 'appartement'>('tous');
   const [location, setLocation] = useState('');
@@ -68,25 +72,16 @@ export function QuickSearchBar() {
           <input
             id="quick-location"
             type="text"
-            list="kolda-locations"
+            list="quick-search-locations"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            placeholder="Ex : Bouna Kane, Sikilo, Vélingara, Diaobé..."
+            placeholder="Quartier ou ville..."
             className="h-11 w-full rounded-md border border-border-strong bg-canvas px-3 text-sm text-ink placeholder:text-ink-muted focus:border-navy focus:outline-none"
           />
-          <datalist id="kolda-locations">
-            <option value="Kolda" />
-            <option value="Bouna Kane" />
-            <option value="Sikilo" />
-            <option value="Doumassou" />
-            <option value="Gadapara" />
-            <option value="HLM Kolda" />
-            <option value="Médina Chérif" />
-            <option value="Dioulacolon" />
-            <option value="Vélingara" />
-            <option value="Diaobé" />
-            <option value="Médina Yoro Foulah" />
-            <option value="Dabo" />
+          <datalist id="quick-search-locations">
+            {locations.map((loc) => (
+              <option key={loc} value={loc} />
+            ))}
           </datalist>
         </div>
 

@@ -6,6 +6,7 @@ import {
   CheckCircle2,
   Clock,
   FileCheck2,
+  Mail,
   MapPin,
   MessageCircle,
   Phone,
@@ -14,13 +15,16 @@ import {
 } from 'lucide-react';
 import { ListingCard } from '@/components/public/ListingCard';
 import { QuickSearchBar } from '@/components/public/QuickSearchBar';
-import { getRecentListings } from '@/lib/data/listings-service';
-import { SITE_CONFIG, buildWhatsAppDirectUrl } from '@/lib/utils/format';
+import { getAvailableLocations, getRecentListings } from '@/lib/data/listings-service';
+import { siteConfig, buildWhatsAppUrl } from '@/src/config/site';
 
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
-  const recentListings = await getRecentListings(4);
+  const [recentListings, availableLocations] = await Promise.all([
+    getRecentListings(4),
+    getAvailableLocations(),
+  ]);
   const featuredListing = recentListings[0] ?? null;
   const secondaryListings = recentListings.slice(1, 4);
 
@@ -33,17 +37,17 @@ export default async function HomePage() {
             <div className="lg:col-span-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-navy-soft bg-navy-deep/70 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-gold-light">
                 <MapPin className="h-3.5 w-3.5" strokeWidth={1.75} />
-                <span>Kolda • Vélingara • Diaobé • Médina Yoro Foulah</span>
+                <span>Zone d’activité : {siteConfig.zone} (Sénégal)</span>
               </div>
 
               <h1 className="mt-5 font-display text-3xl font-bold leading-[1.12] tracking-tight text-white sm:text-5xl">
-                {SITE_CONFIG.slogan}
+                {siteConfig.slogan}
               </h1>
 
               <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
-                Basée à Kolda, l’agence DoorWaarSERVICE concentre son expertise sur la région de
-                Kolda : parcelles au dossier foncier vérifié et appartements meublés prêts à vivre,
-                avec prix nets en FCFA et accompagnement jusqu’à la signature.
+                Basée à {siteConfig.zone}, l’agence {siteConfig.name} sélectionne des parcelles au
+                dossier foncier vérifié et des appartements meublés prêts à vivre. Prix
+                transparents en FCFA, visites rapides et suivi rigoureux jusqu’à la signature.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3.5">
@@ -55,7 +59,7 @@ export default async function HomePage() {
                   <ArrowRight className="h-4 w-4" strokeWidth={2} />
                 </Link>
                 <a
-                  href={buildWhatsAppDirectUrl()}
+                  href={buildWhatsAppUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex h-12 items-center gap-2 rounded-md border border-white/25 bg-navy-soft/60 px-5 text-sm font-semibold text-white transition-colors hover:border-gold-light hover:bg-navy-soft"
@@ -98,7 +102,7 @@ export default async function HomePage() {
                 <div className="relative aspect-[16/10] w-full">
                   <Image
                     src="/images/listings/kolda-residence.jpg"
-                    alt="Résidence contemporaine gérée par DoorWaarSERVICE à Bouna Kane, Kolda"
+                    alt={`Résidence gérée par ${siteConfig.name} à ${siteConfig.zone}`}
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -107,10 +111,10 @@ export default async function HomePage() {
                 </div>
                 <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 bg-navy-deep px-5 py-3.5 text-xs">
                   <span className="font-semibold text-gold-light">
-                    Région de Kolda — Haute-Casamance
+                    Sélection vérifiée {siteConfig.name}
                   </span>
                   <span className="text-slate-300">
-                    Bouna Kane • Sikilo • Vélingara • Diaobé
+                    Zone d’activité : {siteConfig.zone} (Sénégal)
                   </span>
                 </div>
               </div>
@@ -121,7 +125,7 @@ export default async function HomePage() {
 
       {/* Barre de recherche rapide ancrée */}
       <section className="relative z-10 mx-auto -mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <QuickSearchBar />
+        <QuickSearchBar locations={availableLocations} />
       </section>
 
       {/* Annonces récentes */}
@@ -266,16 +270,16 @@ export default async function HomePage() {
                 Parler à un conseiller
               </p>
               <h2 className="mt-2 font-display text-2xl font-bold text-navy sm:text-3xl">
-                Un terrain à visiter ou un séjour à planifier à Kolda ?
+                Un terrain à visiter ou un séjour à planifier à {siteConfig.zone} ?
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-secondary">
-                Indiquez-nous votre secteur et votre budget en FCFA : notre équipe vous propose
-                uniquement des biens vérifiés et disponibles immédiatement.
+                Indiquez-nous vos critères et votre budget en FCFA : notre équipe vous propose
+                uniquement des biens vérifiés et disponibles.
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
-                  href={buildWhatsAppDirectUrl()}
+                  href={buildWhatsAppUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex h-11 items-center gap-2 rounded-md bg-navy px-5 text-sm font-semibold text-white transition-colors hover:bg-navy-soft"
@@ -295,29 +299,44 @@ export default async function HomePage() {
 
             <div className="border-t border-border-subtle bg-sand/60 p-8 sm:p-10 lg:col-span-5 lg:border-l lg:border-t-0">
               <h3 className="font-display text-base font-bold text-navy">
-                Bureau DoorWaarSERVICE
+                Contact {siteConfig.name}
               </h3>
               <ul className="mt-4 space-y-3.5 text-sm text-ink-secondary">
-                <li className="flex items-start gap-2.5">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-text" strokeWidth={1.75} />
-                  <span>{SITE_CONFIG.officeAddress}</span>
-                </li>
+                {siteConfig.address ? (
+                  <li className="flex items-start gap-2.5">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-text" strokeWidth={1.75} />
+                    <span>{siteConfig.address}</span>
+                  </li>
+                ) : null}
                 <li className="flex items-center gap-2.5">
                   <Phone className="h-4 w-4 shrink-0 text-gold-text" strokeWidth={1.75} />
                   <a
-                    href={`tel:${SITE_CONFIG.contactPhone.replace(/\s+/g, '')}`}
+                    href={`tel:${siteConfig.phone.raw}`}
                     className="font-medium text-navy hover:underline"
                   >
-                    {SITE_CONFIG.contactPhone}
+                    {siteConfig.phone.display}
                   </a>
                 </li>
-                <li className="flex items-center gap-2.5">
-                  <Clock className="h-4 w-4 shrink-0 text-gold-text" strokeWidth={1.75} />
-                  <span>{SITE_CONFIG.officeHours}</span>
-                </li>
+                {siteConfig.email ? (
+                  <li className="flex items-center gap-2.5">
+                    <Mail className="h-4 w-4 shrink-0 text-gold-text" strokeWidth={1.75} />
+                    <a
+                      href={`mailto:${siteConfig.email}`}
+                      className="font-medium text-navy hover:underline"
+                    >
+                      {siteConfig.email}
+                    </a>
+                  </li>
+                ) : null}
+                {siteConfig.hours ? (
+                  <li className="flex items-center gap-2.5">
+                    <Clock className="h-4 w-4 shrink-0 text-gold-text" strokeWidth={1.75} />
+                    <span>{siteConfig.hours}</span>
+                  </li>
+                ) : null}
                 <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="h-4 w-4 shrink-0 text-gold-text" strokeWidth={1.75} />
-                  <span>Accueil physique sur rendez-vous &amp; visites vidéo diaspora</span>
+                  <span>Visites sur le terrain à {siteConfig.zone} &amp; visio diaspora</span>
                 </li>
               </ul>
             </div>

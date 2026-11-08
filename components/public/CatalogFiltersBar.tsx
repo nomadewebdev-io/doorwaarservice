@@ -146,7 +146,7 @@ export function CatalogFiltersBar({
               list="catalog-locations-list"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              placeholder="Kolda, Sikilo, Vélingara..."
+              placeholder="Quartier ou ville..."
               className="h-10 w-full rounded-md border border-border-strong bg-canvas px-2.5 text-sm text-ink placeholder:text-ink-muted focus:border-navy focus:outline-none"
             />
             <datalist id="catalog-locations-list">

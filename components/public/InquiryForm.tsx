@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from 'react';
 import { CheckCircle2, Loader2, Send } from 'lucide-react';
 import type { PreferredChannel } from '@/lib/types/database';
+import { siteConfig } from '@/src/config/site';
 
 interface InquiryFormProps {
   mode: 'visite' | 'contact';
@@ -94,10 +95,10 @@ export function InquiryForm({
             <h3 className="font-display text-base font-bold text-emerald-950">
               {mode === 'visite'
                 ? 'Demande de visite enregistrée'
-                : 'Message transmis à DoorWaarSERVICE'}
+                : `Message transmis à ${siteConfig.name}`}
             </h3>
             <p className="mt-1.5 text-sm leading-relaxed text-emerald-900">
-              Un conseiller basé à Kolda vous recontactera sous peu par{' '}
+              Un conseiller basé à {siteConfig.zone} vous recontactera sous peu par{' '}
               {preferredChannel === 'whatsapp'
                 ? 'WhatsApp'
                 : preferredChannel === 'telephone'

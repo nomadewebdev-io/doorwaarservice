@@ -12,6 +12,7 @@ import type {
   PropertyType,
 } from '@/lib/types/database';
 import { formatFCFA } from '@/lib/utils/format';
+import { siteConfig } from '@/src/config/site';
 
 interface ListingFormProps {
   mode: 'create' | 'edit';
@@ -39,7 +40,7 @@ export function ListingForm({ mode, initialListing }: ListingFormProps) {
   const [pricePeriod, setPricePeriod] = useState<PricePeriod>(
     initialListing?.price_period ?? 'total',
   );
-  const [city, setCity] = useState(initialListing?.city ?? 'Kolda');
+  const [city, setCity] = useState(initialListing?.city ?? siteConfig.zone);
   const [neighborhood, setNeighborhood] = useState(initialListing?.neighborhood ?? '');
   const [addressLandmark, setAddressLandmark] = useState(
     initialListing?.address_landmark ?? '',
@@ -290,7 +291,7 @@ export function ListingForm({ mode, initialListing }: ListingFormProps) {
             required
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Ex : Terrain borné 400 m² en Titre Foncier à Bouna Kane, Kolda"
+            placeholder={`Ex : Terrain borné 400 m² en Titre Foncier à ${siteConfig.zone}`}
             className="h-11 w-full rounded-md border border-border-strong bg-canvas px-3 text-sm text-ink focus:border-navy focus:outline-none"
           />
           {fieldErrors.title ? (
@@ -438,7 +439,7 @@ export function ListingForm({ mode, initialListing }: ListingFormProps) {
               required
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              placeholder="Kolda, Vélingara, Diaobé..."
+              placeholder={`Ex : ${siteConfig.zone}`}
               className="h-11 w-full rounded-md border border-border-strong bg-canvas px-3 text-sm text-ink focus:border-navy focus:outline-none"
             />
             {fieldErrors.city ? (
@@ -459,7 +460,7 @@ export function ListingForm({ mode, initialListing }: ListingFormProps) {
               required
               value={neighborhood}
               onChange={(e) => setNeighborhood(e.target.value)}
-              placeholder="Bouna Kane, Sikilo, Doumassou..."
+              placeholder="Nom du quartier ou secteur..."
               className="h-11 w-full rounded-md border border-border-strong bg-canvas px-3 text-sm text-ink focus:border-navy focus:outline-none"
             />
             {fieldErrors.neighborhood ? (

@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
-import { SITE_CONFIG, buildWhatsAppDirectUrl } from '@/lib/utils/format';
+import { Clock, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
+import { siteConfig, buildWhatsAppUrl } from '@/src/config/site';
 
 export function SiteFooter() {
   const currentYear = new Date().getFullYear();
@@ -19,13 +19,12 @@ export function SiteFooter() {
                 <span className="mt-0.5 h-0.5 w-6 rounded-full bg-gold" />
               </span>
               <span className="font-display text-xl font-bold tracking-tight text-white">
-                {SITE_CONFIG.name}
+                {siteConfig.name}
               </span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-300">
-              {SITE_CONFIG.slogan}. Implantée à Kolda, l’agence concentre son activité sur la
-              région de Kolda (Haute-Casamance) : terrains vérifiés et appartements meublés prêts
-              à vivre.
+              {siteConfig.slogan}. Zone d’activité : {siteConfig.zone} (Sénégal). Sélection
+              rigoureuse de parcelles vérifiées et gestion locative meublée.
             </p>
             <div className="mt-6">
               <p className="text-xs font-semibold uppercase tracking-wider text-gold-light">
@@ -95,47 +94,39 @@ export function SiteFooter() {
 
           <div className="lg:col-span-3">
             <h2 className="text-xs font-semibold uppercase tracking-wider text-gold-light">
-              Secteurs — Région de Kolda
+              Prestations à {siteConfig.zone}
             </h2>
             <ul className="mt-4 space-y-2.5 text-sm text-slate-300">
               <li>
                 <Link
-                  href="/catalogue?location=Bouna%20Kane"
+                  href="/catalogue?type=terrain"
                   className="transition-colors hover:text-white"
                 >
-                  Bouna Kane &amp; Sikilo — Kolda
+                  Vente de terrains vérifiés
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/catalogue?location=Doumassou"
+                  href="/catalogue?type=appartement"
                   className="transition-colors hover:text-white"
                 >
-                  Doumassou, Gadapara &amp; HLM Kolda
+                  Location d’appartements meublés
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/catalogue?location=Dioulacolon"
+                  href="/a-propos"
                   className="transition-colors hover:text-white"
                 >
-                  Dioulacolon &amp; Saré Bidji
+                  Sécurisation administrative &amp; notariée
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/catalogue?location=V%C3%A9lingara"
+                  href="/contact"
                   className="transition-colors hover:text-white"
                 >
-                  Vélingara &amp; Diaobé
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/catalogue?location=M%C3%A9dina%20Yoro%20Foulah"
-                  className="transition-colors hover:text-white"
-                >
-                  Médina Yoro Foulah &amp; Dabo
+                  Visites sur site &amp; réservations diaspora
                 </Link>
               </li>
             </ul>
@@ -146,31 +137,41 @@ export function SiteFooter() {
               Contact direct
             </h2>
             <ul className="mt-4 space-y-3 text-sm text-slate-300">
-              <li className="flex items-start gap-2.5">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
-                <span>{SITE_CONFIG.officeAddress}</span>
-              </li>
+              {siteConfig.address ? (
+                <li className="flex items-start gap-2.5">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
+                  <span>{siteConfig.address}</span>
+                </li>
+              ) : null}
               <li className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
                 <a
-                  href={`tel:${SITE_CONFIG.contactPhone.replace(/\s+/g, '')}`}
+                  href={`tel:${siteConfig.phone.raw}`}
                   className="transition-colors hover:text-white"
                 >
-                  {SITE_CONFIG.contactPhone}
+                  {siteConfig.phone.display}
                 </a>
               </li>
-              <li className="flex items-center gap-2.5">
-                <Mail className="h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
-                <a
-                  href={`mailto:${SITE_CONFIG.contactEmail}`}
-                  className="transition-colors hover:text-white"
-                >
-                  {SITE_CONFIG.contactEmail}
-                </a>
-              </li>
+              {siteConfig.email ? (
+                <li className="flex items-center gap-2.5">
+                  <Mail className="h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
+                  <a
+                    href={`mailto:${siteConfig.email}`}
+                    className="transition-colors hover:text-white"
+                  >
+                    {siteConfig.email}
+                  </a>
+                </li>
+              ) : null}
+              {siteConfig.hours ? (
+                <li className="flex items-center gap-2.5">
+                  <Clock className="h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
+                  <span>{siteConfig.hours}</span>
+                </li>
+              ) : null}
               <li className="pt-1">
                 <a
-                  href={buildWhatsAppDirectUrl()}
+                  href={buildWhatsAppUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-md border border-gold px-3.5 py-2 text-xs font-semibold text-gold-light transition-colors hover:bg-gold hover:text-navy-deep"
@@ -185,7 +186,7 @@ export function SiteFooter() {
 
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-navy-soft pt-6 text-xs text-slate-400 sm:flex-row sm:items-center">
           <p>
-            © {currentYear} {SITE_CONFIG.name}. Tous droits réservés.
+            © {currentYear} {siteConfig.name}. Tous droits réservés.
           </p>
           <div className="flex items-center gap-5">
             <span>Montants exprimés en Francs CFA (FCFA)</span>

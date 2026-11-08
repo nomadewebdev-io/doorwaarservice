@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { Menu, MessageCircle, ShieldCheck, X } from 'lucide-react';
-import { SITE_CONFIG, buildWhatsAppDirectUrl } from '@/lib/utils/format';
+import { siteConfig, buildWhatsAppUrl } from '@/src/config/site';
 
 const NAV_LINKS = [
   { href: '/', label: 'Accueil' },
@@ -17,7 +17,7 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const whatsappHref = buildWhatsAppDirectUrl();
+  const whatsappHref = buildWhatsAppUrl();
 
   return (
     <header className="sticky top-0 z-40 border-b border-border-subtle bg-surface">
@@ -35,10 +35,10 @@ export function SiteHeader() {
           </span>
           <span className="flex flex-col">
             <span className="font-display text-lg font-bold tracking-tight text-navy">
-              {SITE_CONFIG.name}
+              {siteConfig.name}
             </span>
             <span className="hidden text-[11px] font-medium tracking-wide text-ink-muted sm:block">
-              Terrains &amp; meublés au Sénégal
+              {siteConfig.slogan}
             </span>
           </span>
         </Link>

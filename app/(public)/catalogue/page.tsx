@@ -5,14 +5,13 @@ import { CatalogFiltersBar } from '@/components/public/CatalogFiltersBar';
 import { ListingCard } from '@/components/public/ListingCard';
 import { getAvailableLocations, getPublicListings } from '@/lib/data/listings-service';
 import type { CatalogFilters, CatalogSortOption, ListingStatus, PropertyType } from '@/lib/types/database';
-import { buildWhatsAppDirectUrl } from '@/lib/utils/format';
+import { siteConfig, buildWhatsAppUrl } from '@/src/config/site';
 
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Catalogue des terrains et appartements meublés — Région de Kolda',
-  description:
-    'Consultez nos terrains vérifiés à vendre et nos appartements meublés à louer à Kolda (Bouna Kane, Sikilo, Doumassou, Gadapara), Vélingara, Diaobé et Médina Yoro Foulah.',
+  title: `Catalogue des terrains et appartements meublés — Région de ${siteConfig.zone}`,
+  description: `Consultez nos terrains vérifiés à vendre et nos appartements meublés à louer dans la région de ${siteConfig.zone}.`,
 };
 
 interface CataloguePageProps {
@@ -140,8 +139,9 @@ export default async function CataloguePage({ searchParams }: CataloguePageProps
                 Réinitialiser les filtres
               </Link>
               <a
-                href={buildWhatsAppDirectUrl(
-                  'Bonjour DoorWaarSERVICE, je recherche un bien spécifique qui ne figure pas encore dans les résultats du catalogue.',
+                href={buildWhatsAppUrl(
+                  null,
+                  `Bonjour ${siteConfig.name}, je recherche un bien spécifique qui ne figure pas encore dans les résultats du catalogue.`,
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -163,4 +163,3 @@ export default async function CataloguePage({ searchParams }: CataloguePageProps
     </div>
   );
 }
-
