@@ -14,14 +14,14 @@ export default function ContactPage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-wider text-gold-text">
-            Contact &amp; rendez-vous
+            Contact
           </p>
           <h1 className="mt-1.5 font-display text-3xl font-bold tracking-tight text-navy sm:text-4xl">
             Échanger avec un conseiller {siteConfig.name}
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-ink-secondary sm:text-base">
             Que vous recherchiez un terrain vérifié ou un appartement meublé à {siteConfig.zone},
-            laissez-nous vos critères ou joignez notre bureau sur WhatsApp.
+            laissez-nous vos critères ou joignez-nous directement sur WhatsApp.
           </p>
         </div>
 
@@ -29,31 +29,13 @@ export default function ContactPage() {
           <div className="space-y-6 lg:col-span-5">
             <div className="rounded-xl border border-border-subtle bg-navy p-6 text-white sm:p-7">
               <h2 className="font-display text-lg font-bold text-white">
-                Canaux directs — {siteConfig.zone}
+                Contact
               </h2>
               <p className="mt-1.5 text-xs text-slate-300">
-                Réponse rapide durant les heures de bureau et prise de rendez-vous le samedi.
+                Service en ligne disponible 7j/7 et accompagnement personnalisé pour vos projets à {siteConfig.zone}.
               </p>
 
               <ul className="mt-6 space-y-4 text-sm">
-                {/* Téléphone direct */}
-                {siteConfig.phone.display ? (
-                  <li className="flex items-start gap-3">
-                    <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
-                    <div>
-                      <span className="block text-xs uppercase tracking-wider text-slate-400">
-                        Téléphone
-                      </span>
-                      <a
-                        href={`tel:${siteConfig.phone.raw}`}
-                        className="font-semibold text-white hover:text-gold-light"
-                      >
-                        {siteConfig.phone.display}
-                      </a>
-                    </div>
-                  </li>
-                ) : null}
-
                 {/* WhatsApp direct */}
                 <li className="flex items-start gap-3">
                   <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
@@ -72,20 +54,25 @@ export default function ContactPage() {
                   </div>
                 </li>
 
-                {/* Adresse - masquée si non renseignée */}
-                {siteConfig.address ? (
+                {/* Téléphone direct */}
+                {siteConfig.phone.display ? (
                   <li className="flex items-start gap-3">
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
+                    <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
                     <div>
                       <span className="block text-xs uppercase tracking-wider text-slate-400">
-                        Adresse du bureau
+                        Téléphone
                       </span>
-                      <span className="font-medium text-white">{siteConfig.address}</span>
+                      <a
+                        href={`tel:${siteConfig.phone.raw}`}
+                        className="font-semibold text-white hover:text-gold-light"
+                      >
+                        {siteConfig.phone.display}
+                      </a>
                     </div>
                   </li>
                 ) : null}
 
-                {/* Email - masqué si non renseigné */}
+                {/* Email */}
                 {siteConfig.email ? (
                   <li className="flex items-start gap-3">
                     <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
@@ -103,15 +90,28 @@ export default function ContactPage() {
                   </li>
                 ) : null}
 
-                {/* Horaires - masqués si non renseignés */}
+                {/* Horaires */}
                 {siteConfig.hours ? (
                   <li className="flex items-start gap-3">
                     <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
                     <div>
                       <span className="block text-xs uppercase tracking-wider text-slate-400">
-                        Horaires d’accueil
+                        Horaires
                       </span>
                       <span className="text-slate-200">{siteConfig.hours}</span>
+                    </div>
+                  </li>
+                ) : null}
+
+                {/* Adresse - masquée si non renseignée */}
+                {siteConfig.address ? (
+                  <li className="flex items-start gap-3">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
+                    <div>
+                      <span className="block text-xs uppercase tracking-wider text-slate-400">
+                        Adresse
+                      </span>
+                      <span className="font-medium text-white">{siteConfig.address}</span>
                     </div>
                   </li>
                 ) : null}
@@ -153,8 +153,8 @@ export default function ContactPage() {
               Envoyer une demande écrite
             </h2>
             <p className="mt-1.5 text-sm text-ink-secondary">
-              Précisez votre besoin (achat de terrain, location meublée ou prise de rendez-vous au
-              bureau) et votre mode de contact préféré.
+              Précisez votre besoin (achat de terrain vérifié ou réservation d’appartement meublé)
+              et votre mode de contact préféré.
             </p>
             <div className="mt-6">
               <InquiryForm mode="contact" />

@@ -299,22 +299,27 @@ export default async function HomePage() {
 
             <div className="border-t border-border-subtle bg-sand/60 p-8 sm:p-10 lg:col-span-5 lg:border-l lg:border-t-0">
               <h3 className="font-display text-base font-bold text-navy">
-                Contact {siteConfig.name}
+                Contact
               </h3>
               <ul className="mt-4 space-y-3.5 text-sm text-ink-secondary">
-                {siteConfig.address ? (
-                  <li className="flex items-start gap-2.5">
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-text" strokeWidth={1.75} />
-                    <span>{siteConfig.address}</span>
-                  </li>
-                ) : null}
+                <li className="flex items-center gap-2.5">
+                  <MessageCircle className="h-4 w-4 shrink-0 text-gold-text" strokeWidth={1.75} />
+                  <a
+                    href={buildWhatsAppUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-navy hover:underline"
+                  >
+                    WhatsApp : {siteConfig.whatsapp.display}
+                  </a>
+                </li>
                 <li className="flex items-center gap-2.5">
                   <Phone className="h-4 w-4 shrink-0 text-gold-text" strokeWidth={1.75} />
                   <a
                     href={`tel:${siteConfig.phone.raw}`}
                     className="font-medium text-navy hover:underline"
                   >
-                    {siteConfig.phone.display}
+                    Téléphone : {siteConfig.phone.display}
                   </a>
                 </li>
                 {siteConfig.email ? (
@@ -329,9 +334,15 @@ export default async function HomePage() {
                   </li>
                 ) : null}
                 {siteConfig.hours ? (
-                  <li className="flex items-center gap-2.5">
-                    <Clock className="h-4 w-4 shrink-0 text-gold-text" strokeWidth={1.75} />
+                  <li className="flex items-start gap-2.5">
+                    <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold-text" strokeWidth={1.75} />
                     <span>{siteConfig.hours}</span>
+                  </li>
+                ) : null}
+                {siteConfig.address ? (
+                  <li className="flex items-start gap-2.5">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-text" strokeWidth={1.75} />
+                    <span>{siteConfig.address}</span>
                   </li>
                 ) : null}
                 <li className="flex items-center gap-2.5">

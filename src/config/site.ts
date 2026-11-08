@@ -44,8 +44,8 @@ export const siteConfig: SiteConfig = {
     display: '+221 77 489 82 43',
   },
   address: '',
-  email: '',
-  hours: '',
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || process.env.CONTACT_EMAIL || 'kingzaf97@gmail.com',
+  hours: 'Service en ligne, demandes acceptées 24h/24',
   neighborhoods: [],
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://doorwaarservice.sn',
   seo: {
@@ -124,3 +124,4 @@ export function getLocalBusinessJsonLd() {
 
   return jsonLd;
 }
+

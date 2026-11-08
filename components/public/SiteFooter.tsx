@@ -134,22 +134,27 @@ export function SiteFooter() {
 
           <div className="lg:col-span-3">
             <h2 className="text-xs font-semibold uppercase tracking-wider text-gold-light">
-              Contact direct
+              Contact
             </h2>
             <ul className="mt-4 space-y-3 text-sm text-slate-300">
-              {siteConfig.address ? (
-                <li className="flex items-start gap-2.5">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
-                  <span>{siteConfig.address}</span>
-                </li>
-              ) : null}
+              <li className="flex items-center gap-2.5">
+                <MessageCircle className="h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
+                <a
+                  href={buildWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-white"
+                >
+                  WhatsApp : {siteConfig.whatsapp.display}
+                </a>
+              </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
                 <a
                   href={`tel:${siteConfig.phone.raw}`}
                   className="transition-colors hover:text-white"
                 >
-                  {siteConfig.phone.display}
+                  Téléphone : {siteConfig.phone.display}
                 </a>
               </li>
               {siteConfig.email ? (
@@ -164,22 +169,17 @@ export function SiteFooter() {
                 </li>
               ) : null}
               {siteConfig.hours ? (
-                <li className="flex items-center gap-2.5">
-                  <Clock className="h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
+                <li className="flex items-start gap-2.5">
+                  <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
                   <span>{siteConfig.hours}</span>
                 </li>
               ) : null}
-              <li className="pt-1">
-                <a
-                  href={buildWhatsAppUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md border border-gold px-3.5 py-2 text-xs font-semibold text-gold-light transition-colors hover:bg-gold hover:text-navy-deep"
-                >
-                  <MessageCircle className="h-4 w-4" strokeWidth={1.75} />
-                  <span>Discuter sur WhatsApp</span>
-                </a>
-              </li>
+              {siteConfig.address ? (
+                <li className="flex items-start gap-2.5">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-light" strokeWidth={1.75} />
+                  <span>{siteConfig.address}</span>
+                </li>
+              ) : null}
             </ul>
           </div>
         </div>

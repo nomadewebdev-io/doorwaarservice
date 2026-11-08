@@ -48,8 +48,8 @@ export default function AboutPage() {
             À propos de {siteConfig.name}
           </p>
           <h1 className="mt-3 max-w-3xl font-display text-3xl font-bold leading-tight sm:text-4xl">
-            Une agence immobilière sénégalaise bâtie sur la clarté foncière et la qualité
-            d’accueil.
+            Une agence immobilière sénégalaise bâtie sur la clarté foncière et la réactivité
+            du service client.
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300">
             {siteConfig.slogan}. Implantée à {siteConfig.zone}, notre équipe concentre son action sur

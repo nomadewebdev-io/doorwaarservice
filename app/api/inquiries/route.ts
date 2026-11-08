@@ -2,6 +2,43 @@ import { NextResponse } from 'next/server';
 import { isSupabaseConfigured } from '@/lib/supabase/config';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { validateInquiryInput } from '@/lib/validation/schemas';
+import { siteConfig } from '@/src/config/site';
+
+/**
+ * Notifie l'administrateur de la nouvelle demande de visite ou contact.
+ * Utilise la variable d'environnement CONTACT_EMAIL (avec repli sur siteConfig.email),
+ * sans jamais inscrire d'adresse email en dur dans le code.
+ */
+async function notifyInquiryRecipient(data: {
+  inquiry_type: string;
+  full_name: string;
+  phone: string;
+  email?: string | null;
+  listing_title?: string | null;
+  preferred_channel: string;
+  preferred_visit_date?: string | null;
+  message: string;
+}) {
+  const recipientEmail = process.env.CONTACT_EMAIL || siteConfig.email;
+  if (!recipientEmail) return;
+
+  // Journalisation de la notification à destination de l'email configuré
+  console.info(`[Notification demande client] Transmission vers ${recipientEmail} :`, {
+    destinataire: recipientEmail,
+    sujet:
+      data.inquiry_type === 'visite'
+        ? `Demande de visite — ${data.listing_title || 'Annonce'}`
+        : `Demande de contact — ${data.full_name}`,
+    type: data.inquiry_type,
+    client: data.full_name,
+    telephone: data.phone,
+    email: data.email || null,
+    canal: data.preferred_channel,
+    dateVisite: data.preferred_visit_date || null,
+    message: data.message,
+    horodatage: new Date().toISOString(),
+  });
+}
 
 export async function POST(request: Request) {
   try {
@@ -17,6 +54,9 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
+
+    // Déclenchement de la notification vers CONTACT_EMAIL
+    await notifyInquiryRecipient(validation.data);
 
     if (!isSupabaseConfigured()) {
       return NextResponse.json(
@@ -61,4 +101,3 @@ export async function POST(request: Request) {
     );
   }
 }
-
