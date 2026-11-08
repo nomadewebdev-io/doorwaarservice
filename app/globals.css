@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+:root {
+  /* Identité DoorWaarSERVICE : Bleu nuit & Doré sable — modifiez ces variables pour adapter la charte */
+  --dw-bg-canvas: #faf8f4;
+  --dw-bg-surface: #ffffff;
+  --dw-bg-sand: #f2ede3;
+  --dw-bg-navy: #0f2137;
+  --dw-bg-navy-deep: #091524;
+  --dw-bg-navy-soft: #193454;
+
+  --dw-accent-gold: #c49545;
+  --dw-accent-gold-hover: #ab7f35;
+  --dw-accent-gold-text: #8a611d;
+  --dw-accent-gold-light: #e2bd7c;
+  --dw-accent-gold-tint: #f6efe1;
+
+  --dw-ink-primary: #111827;
+  --dw-ink-secondary: #475569;
+  --dw-ink-muted: #64748b;
+
+  --dw-border: #e5dfd2;
+  --dw-border-strong: #cdc2ae;
+
+  --dw-status-available-bg: #ecfdf5;
+  --dw-status-available-text: #166534;
+  --dw-status-available-border: #bbf7d0;
+
+  --dw-status-reserved-bg: #fffbeb;
+  --dw-status-reserved-text: #92400e;
+  --dw-status-reserved-border: #fde68a;
+
+  --dw-status-sold-bg: #f1f5f9;
+  --dw-status-sold-text: #334155;
+  --dw-status-sold-border: #cbd5e1;
+}
+
+@theme inline {
+  --color-canvas: var(--dw-bg-canvas);
+  --color-surface: var(--dw-bg-surface);
+  --color-sand: var(--dw-bg-sand);
+  --color-navy: var(--dw-bg-navy);
+  --color-navy-deep: var(--dw-bg-navy-deep);
+  --color-navy-soft: var(--dw-bg-navy-soft);
+  --color-gold: var(--dw-accent-gold);
+  --color-gold-hover: var(--dw-accent-gold-hover);
+  --color-gold-text: var(--dw-accent-gold-text);
+  --color-gold-light: var(--dw-accent-gold-light);
+  --color-gold-tint: var(--dw-accent-gold-tint);
+  --color-ink: var(--dw-ink-primary);
+  --color-ink-secondary: var(--dw-ink-secondary);
+  --color-ink-muted: var(--dw-ink-muted);
+  --color-border-subtle: var(--dw-border);
+  --color-border-strong: var(--dw-border-strong);
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--dw-bg-canvas);
+  color: var(--dw-ink-primary);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-display {
+  font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
