@@ -1,7 +1,7 @@
 import { createServerClient } from '@supabase/ssr';
 import { createClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
-import { getSupabaseEnv } from '@/lib/supabase/config';
+import { getSupabaseEnv, normalizeSupabaseUrl } from '@/lib/supabase/config';
 
 export async function createSupabaseServerClient() {
   const { url, anonKey } = getSupabaseEnv();
@@ -31,8 +31,9 @@ export async function createSupabaseServerClient() {
  * Ne JAMAIS importer ce client dans un composant client ('use client').
  */
 export function createSupabaseAdminClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const rawUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();
+  const url = normalizeSupabaseUrl(rawUrl);
 
   if (!url || !serviceRoleKey) {
     throw new Error(

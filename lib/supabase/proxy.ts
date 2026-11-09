@@ -52,7 +52,8 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  if (isLoginRoute && user) {
+  const hasErrorParam = request.nextUrl.searchParams.has('error');
+  if (isLoginRoute && user && !hasErrorParam) {
     const adminUrl = request.nextUrl.clone();
     adminUrl.pathname = '/admin';
     return NextResponse.redirect(adminUrl);

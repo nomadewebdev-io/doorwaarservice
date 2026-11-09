@@ -30,15 +30,27 @@ export function AdminLoginForm({
     setErrorMsg(null);
 
     try {
-      const supabase = createSupabaseBrowserClient();
-      const { error } = await supabase.auth.signInWithPassword({
-        email: email.trim(),
-        password,
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim(), password }),
       });
 
-      if (error) {
-        setErrorMsg('Identifiants invalides ou accès non autorisé.');
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok || !data?.ok) {
+        setErrorMsg(data?.error || 'email ou mot de passe incorrect');
         return;
+      }
+
+      // Synchronisation immédiate du client Supabase côté navigateur
+      if (data.session) {
+        try {
+          const supabase = createSupabaseBrowserClient();
+          await supabase.auth.setSession(data.session);
+        } catch {
+          // Les cookies HTTP du serveur gèrent la session principale
+        }
       }
 
       router.push(redirectTo);
@@ -127,4 +139,3 @@ export function AdminLoginForm({
     </form>
   );
 }
-

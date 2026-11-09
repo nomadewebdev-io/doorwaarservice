@@ -26,7 +26,7 @@ export default async function AdminLoginPage({ searchParams }: AdminLoginPagePro
   const errorCode = Array.isArray(params.error) ? params.error[0] : params.error;
   const initialError =
     errorCode === 'unauthorized'
-      ? 'Votre compte authentifié ne dispose pas encore d’un rôle agent ou owner dans la table profiles.'
+      ? 'profil introuvable ou accès refusé'
       : undefined;
 
   return (
