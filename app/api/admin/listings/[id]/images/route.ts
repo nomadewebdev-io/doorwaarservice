@@ -5,11 +5,31 @@ interface RouteContext {
   params: Promise<{ id: string }>;
 }
 
+async function canManageListing(
+  guard: { supabase: any; profile: { id: string; role: string } },
+  listingId: string,
+): Promise<boolean> {
+  if (guard.profile.role === 'owner') return true;
+  const { data } = await guard.supabase
+    .from('listings')
+    .select('created_by')
+    .eq('id', listingId)
+    .maybeSingle();
+  return data?.created_by === guard.profile.id;
+}
+
 export async function POST(request: Request, context: RouteContext) {
   const guard = await requireStaffApi();
   if (!guard.ok) return guard.response;
 
   const { id } = await context.params;
+
+  if (!(await canManageListing(guard, id))) {
+    return NextResponse.json(
+      { error: 'Accès refusé : vous ne pouvez ajouter des photos qu’à vos propres annonces.' },
+      { status: 403 },
+    );
+  }
 
   try {
     const body = (await request.json()) as {
@@ -63,6 +83,13 @@ export async function PATCH(request: Request, context: RouteContext) {
 
   const { id } = await context.params;
 
+  if (!(await canManageListing(guard, id))) {
+    return NextResponse.json(
+      { error: 'Accès refusé : vous ne pouvez modifier que les photos de vos propres annonces.' },
+      { status: 403 },
+    );
+  }
+
   try {
     const body = (await request.json()) as { imageId?: string };
     if (!body.imageId) {
@@ -100,6 +127,14 @@ export async function DELETE(request: Request, context: RouteContext) {
   if (!guard.ok) return guard.response;
 
   const { id } = await context.params;
+
+  if (!(await canManageListing(guard, id))) {
+    return NextResponse.json(
+      { error: 'Accès refusé : vous ne pouvez supprimer que les photos de vos propres annonces.' },
+      { status: 403 },
+    );
+  }
+
   const { searchParams } = new URL(request.url);
   const imageId = searchParams.get('imageId');
 
@@ -137,4 +172,3 @@ export async function DELETE(request: Request, context: RouteContext) {
 
   return NextResponse.json({ ok: true });
 }
-

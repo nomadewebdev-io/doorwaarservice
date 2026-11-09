@@ -7,10 +7,16 @@ export async function GET() {
   const guard = await requireStaffApi();
   if (!guard.ok) return guard.response;
 
-  const { data, error } = await guard.supabase
+  let query = guard.supabase
     .from('listings')
     .select('*, listing_images(*)')
     .order('created_at', { ascending: false });
+
+  if (guard.profile.role === 'agent') {
+    query = query.eq('created_by', guard.profile.id);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     return NextResponse.json(

@@ -15,7 +15,7 @@ export default async function OwnerDashboardPage() {
 
   const [{ data: settingsData }, { data: salesData }, { data: inquiriesData }] =
     await Promise.all([
-      supabase.from('agency_settings').select('default_commission_rate').eq('id', 1).maybeSingle(),
+      supabase.from('settings').select('default_commission_rate').eq('id', 1).maybeSingle(),
       supabase
         .from('sales')
         .select(

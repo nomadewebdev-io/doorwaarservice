@@ -32,11 +32,23 @@ export interface Profile {
   updated_at: string;
 }
 
-export interface AgencySettings {
+export interface Settings {
   id: number;
   default_commission_rate: number;
   updated_by: string | null;
   updated_at: string;
+}
+
+export type AgencySettings = Settings;
+
+export interface StatusHistory {
+  id: string;
+  listing_id: string;
+  changed_by: string | null;
+  old_status: string | null;
+  new_status: string;
+  price_fcfa: number | null;
+  created_at: string;
 }
 
 export interface ListingImage {

@@ -21,20 +21,11 @@ Site web immobilier complet pour **DoorWaarSERVICE** (*Terrains et appartements 
 
 ## 2. Mise en place de Supabase
 
-1. Créez un projet Supabase.
-2. Exécutez le script SQL [supabase/migrations/001_initial_schema.sql](./supabase/migrations/001_initial_schema.sql) dans **SQL Editor** :
-   - Crée les tables `profiles`, `agency_settings`, `listings`, `listing_images`, `inquiries`, `sales`, `commissions`.
-   - Active les politiques **RLS strictes** par rôle (`agent` et `owner`) ainsi que l'insertion publique sur `inquiries`.
-   - Installe la fonction transactionnelle `mark_listing_sold(...)` et le trigger calculant automatiquement la commission à chaque vente.
-   - Crée le bucket public `listing-images` pour les photos.
-3. (Optionnel) Exécutez [supabase/seed.sql](./supabase/seed.sql) pour charger les annonces initiales de la région de Kolda.
-4. Créez vos comptes dans **Authentication → Users**, puis associez leur rôle dans `public.profiles` :
-   ```sql
-   insert into public.profiles (id, email, full_name, role)
-   values
-     ('<UUID_UTILISATEUR_OWNER>', 'direction@doorwaarservice.sn', 'Directeur DoorWaarSERVICE', 'owner'),
-     ('<UUID_UTILISATEUR_AGENT>', 'agent@doorwaarservice.sn', 'Conseiller Terrain', 'agent');
-   ```
+Consultez [SETUP.md](./SETUP.md) pour le guide rapide en 8 étapes :
+1. Exécutez le script SQL idempotent [supabase/migrations/001_init.sql](./supabase/migrations/001_init.sql) dans **SQL Editor**.
+2. Créez vos utilisateurs dans **Authentication → Users**.
+3. Exécutez [supabase/seed_roles.sql](./supabase/seed_roles.sql) après avoir renseigné vos adresses e-mail pour assigner les rôles `owner` et `agent`.
+4. (Optionnel) Exécutez [supabase/seed.sql](./supabase/seed.sql) pour charger les annonces initiales de Kolda.
 
 ## 3. Personnalisation des couleurs
 

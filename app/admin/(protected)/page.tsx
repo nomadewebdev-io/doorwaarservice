@@ -1,4 +1,5 @@
 import { AgentListingsManager } from '@/components/admin/AgentListingsManager';
+import { requireStaffProfile } from '@/lib/auth/session';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import type { ListingImage, ListingWithImages } from '@/lib/types/database';
 
@@ -13,11 +14,20 @@ function sortImages(images: ListingImage[] | undefined): ListingImage[] {
 }
 
 export default async function AdminListingsPage() {
+  const profile = await requireStaffProfile();
   const supabase = await createSupabaseServerClient();
-  const { data } = await supabase
+
+  let query = supabase
     .from('listings')
     .select('*, listing_images(*)')
     .order('created_at', { ascending: false });
+
+  // Un agent gère uniquement ses propres annonces ; le owner accède à la totalité
+  if (profile.role === 'agent') {
+    query = query.eq('created_by', profile.id);
+  }
+
+  const { data } = await query;
 
   const listings = ((data as ListingWithImages[]) ?? []).map((item) => ({
     ...item,
@@ -26,4 +36,3 @@ export default async function AdminListingsPage() {
 
   return <AgentListingsManager initialListings={listings} />;
 }
-

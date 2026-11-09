@@ -33,6 +33,10 @@ export function ListingPhotoManager({
 
     try {
       const supabase = createSupabaseBrowserClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      const userFolder = user?.id || 'public';
       const uploadedImages: ListingImage[] = [];
 
       for (let index = 0; index < files.length; index += 1) {
@@ -47,7 +51,7 @@ export function ListingPhotoManager({
         }
 
         const safeExt = file.name.split('.').pop()?.toLowerCase() || 'jpg';
-        const storagePath = `${listingId}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${safeExt}`;
+        const storagePath = `${userFolder}/${listingId}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${safeExt}`;
 
         const { error: uploadError } = await supabase.storage
           .from('listing-images')

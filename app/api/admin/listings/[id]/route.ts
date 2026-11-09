@@ -28,12 +28,19 @@ export async function PATCH(request: Request, context: RouteContext) {
 
     const { data: existing, error: fetchError } = await guard.supabase
       .from('listings')
-      .select('id, status')
+      .select('id, status, created_by')
       .eq('id', id)
       .maybeSingle();
 
     if (fetchError || !existing) {
       return NextResponse.json({ error: 'Annonce introuvable.' }, { status: 404 });
+    }
+
+    if (guard.profile.role === 'agent' && existing.created_by !== guard.profile.id) {
+      return NextResponse.json(
+        { error: 'Accès refusé : vous ne pouvez modifier que vos propres annonces.' },
+        { status: 403 },
+      );
     }
 
     const wantsTransitionToSold =
@@ -95,6 +102,35 @@ export async function DELETE(_request: Request, context: RouteContext) {
   if (!guard.ok) return guard.response;
 
   const { id } = await context.params;
+
+  const { data: existing, error: existingError } = await guard.supabase
+    .from('listings')
+    .select('id, status, created_by')
+    .eq('id', id)
+    .maybeSingle();
+
+  if (existingError || !existing) {
+    return NextResponse.json({ error: 'Annonce introuvable.' }, { status: 404 });
+  }
+
+  // Un agent ne peut supprimer que ses propres annonces, et jamais une annonce vendue ou louée
+  if (guard.profile.role === 'agent') {
+    if (existing.created_by !== guard.profile.id) {
+      return NextResponse.json(
+        { error: 'Accès refusé : vous ne pouvez supprimer que vos propres annonces.' },
+        { status: 403 },
+      );
+    }
+    if (existing.status === 'vendu' || existing.status === 'loue') {
+      return NextResponse.json(
+        {
+          error:
+            'Une annonce vendue ou louée ne peut pas être supprimée par un agent. Veuillez l’archiver (dépublier) à la place.',
+        },
+        { status: 403 },
+      );
+    }
+  }
 
   const { data: images } = await guard.supabase
     .from('listing_images')

@@ -112,11 +112,15 @@ export function ListingForm({ mode, initialListing }: ListingFormProps) {
   async function uploadQueuedPhotos(listingId: string, listingTitle: string) {
     if (pendingFiles.length === 0) return;
     const supabase = createSupabaseBrowserClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const userFolder = user?.id || 'public';
 
     for (let i = 0; i < pendingFiles.length; i += 1) {
       const file = pendingFiles[i];
       const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg';
-      const storagePath = `${listingId}/${Date.now()}-${i}-${Math.random().toString(36).slice(2, 7)}.${ext}`;
+      const storagePath = `${userFolder}/${listingId}/${Date.now()}-${i}-${Math.random().toString(36).slice(2, 7)}.${ext}`;
 
       const { error: uploadErr } = await supabase.storage
         .from('listing-images')

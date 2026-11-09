@@ -1,4 +1,5 @@
 import { createServerClient } from '@supabase/ssr';
+import { createClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
 import { getSupabaseEnv } from '@/lib/supabase/config';
 
@@ -24,3 +25,25 @@ export async function createSupabaseServerClient() {
   });
 }
 
+/**
+ * Client Supabase administratif doté des privilèges service_role.
+ * STRICTEMENT utilisable côté serveur (Node.js/Next Server).
+ * Ne JAMAIS importer ce client dans un composant client ('use client').
+ */
+export function createSupabaseAdminClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!url || !serviceRoleKey) {
+    throw new Error(
+      'Variables manquantes pour createSupabaseAdminClient : configurez NEXT_PUBLIC_SUPABASE_URL et SUPABASE_SERVICE_ROLE_KEY côté serveur.',
+    );
+  }
+
+  return createClient(url, serviceRoleKey, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+    },
+  });
+}

@@ -19,7 +19,7 @@ export async function PATCH(request: Request) {
     const roundedRate = Math.round(rate * 100) / 100;
 
     const { data, error } = await guard.supabase
-      .from('agency_settings')
+      .from('settings')
       .update({
         default_commission_rate: roundedRate,
         updated_by: guard.profile.id,
