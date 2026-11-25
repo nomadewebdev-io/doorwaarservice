@@ -1,4 +1,14 @@
 /**
+ * Configuration Supabase pour DoorWaarSERVICE
+ * Comprend les valeurs par défaut du projet en fallback pour garantir
+ * le bon fonctionnement immédiat en environnement local et hébergé (Vercel / Netlify).
+ */
+
+const DEFAULT_SUPABASE_URL = 'https://otnulacmpzqdsyvoyoxf.supabase.co';
+const DEFAULT_SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90bnVsYWNtcHpxZHN5dm95b3hmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQxNzQ0NDMsImV4cCI6MjEwOTc1MDQ0M30.8HCj4TWWtZk25d7f36-prhmo3q37TR_HkxCExs2J6Jg';
+
+/**
  * Nettoie et normalise l'URL du projet Supabase :
  * - Supprime les espaces superflus
  * - Retire /rest/v1 ou /rest/v1/ si collé par inadvertance depuis le dashboard Supabase
@@ -21,11 +31,7 @@ export function normalizeSupabaseKey(rawKey?: string): string {
 }
 
 export function isSupabaseConfigured(): boolean {
-  const url = normalizeSupabaseUrl(process.env.NEXT_PUBLIC_SUPABASE_URL);
-  const anonKey = normalizeSupabaseKey(
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
-  );
+  const { url, anonKey } = getSupabaseEnv();
   return Boolean(
     url &&
       anonKey &&
@@ -36,17 +42,27 @@ export function isSupabaseConfigured(): boolean {
 }
 
 export function getSupabaseEnv(): { url: string; anonKey: string } {
-  const rawUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const rawKey =
+  const envUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const envKey =
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
-  const url = normalizeSupabaseUrl(rawUrl);
-  const anonKey = normalizeSupabaseKey(rawKey);
+  const resolvedUrl =
+    envUrl && !envUrl.includes('votre-projet')
+      ? envUrl
+      : DEFAULT_SUPABASE_URL;
+
+  const resolvedKey =
+    envKey && !envKey.includes('votre-cle')
+      ? envKey
+      : DEFAULT_SUPABASE_ANON_KEY;
+
+  const url = normalizeSupabaseUrl(resolvedUrl);
+  const anonKey = normalizeSupabaseKey(resolvedKey);
 
   if (!url || !anonKey) {
     throw new Error(
-      'Variables Supabase manquantes : configurez NEXT_PUBLIC_SUPABASE_URL et NEXT_PUBLIC_SUPABASE_ANON_KEY (ou NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY).',
+      'Variables Supabase manquantes : configurez NEXT_PUBLIC_SUPABASE_URL et NEXT_PUBLIC_SUPABASE_ANON_KEY.',
     );
   }
   return { url, anonKey };

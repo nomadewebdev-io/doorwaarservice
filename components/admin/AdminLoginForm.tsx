@@ -6,13 +6,12 @@ import { Loader2, Lock } from 'lucide-react';
 import { createSupabaseBrowserClient } from '@/lib/supabase/client';
 
 interface AdminLoginFormProps {
-  supabaseReady: boolean;
+  supabaseReady?: boolean;
   redirectTo: string;
   initialError?: string;
 }
 
 export function AdminLoginForm({
-  supabaseReady,
   redirectTo,
   initialError,
 }: AdminLoginFormProps) {
@@ -24,7 +23,6 @@ export function AdminLoginForm({
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!supabaseReady) return;
 
     setSubmitting(true);
     setErrorMsg(null);
@@ -64,18 +62,6 @@ export function AdminLoginForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {!supabaseReady ? (
-        <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-xs leading-relaxed text-amber-950">
-          <p className="font-bold">Configuration Supabase requise</p>
-          <p className="mt-1">
-            Renseignez <code className="font-mono">NEXT_PUBLIC_SUPABASE_URL</code> et{' '}
-            <code className="font-mono">NEXT_PUBLIC_SUPABASE_ANON_KEY</code> dans{' '}
-            <code className="font-mono">.env.local</code> puis exécutez la migration SQL pour
-            activer la connexion agent et propriétaire.
-          </p>
-        </div>
-      ) : null}
-
       {errorMsg ? (
         <div
           role="alert"
@@ -96,9 +82,8 @@ export function AdminLoginForm({
           autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          disabled={!supabaseReady}
           placeholder="agent@doorwaarservice.sn"
-          className="h-11 w-full rounded-md border border-border-strong bg-canvas px-3 text-sm text-ink placeholder:text-ink-muted focus:border-navy focus:outline-none disabled:opacity-60"
+          className="h-11 w-full rounded-md border border-border-strong bg-canvas px-3 text-sm text-ink placeholder:text-ink-muted focus:border-navy focus:outline-none"
         />
       </div>
 
@@ -113,15 +98,14 @@ export function AdminLoginForm({
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          disabled={!supabaseReady}
           placeholder="••••••••"
-          className="h-11 w-full rounded-md border border-border-strong bg-canvas px-3 text-sm text-ink placeholder:text-ink-muted focus:border-navy focus:outline-none disabled:opacity-60"
+          className="h-11 w-full rounded-md border border-border-strong bg-canvas px-3 text-sm text-ink placeholder:text-ink-muted focus:border-navy focus:outline-none"
         />
       </div>
 
       <button
         type="submit"
-        disabled={!supabaseReady || submitting}
+        disabled={submitting}
         className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-md bg-navy px-4 text-sm font-semibold text-white transition-colors hover:bg-navy-soft disabled:opacity-50"
       >
         {submitting ? (
